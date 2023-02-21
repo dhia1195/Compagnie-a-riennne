@@ -58,8 +58,8 @@ public class LoginController implements Initializable {
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
-                        ClientController cca=loaderadmin.getController();
-                        cca.setClient(user);
+                        AdminController ac=loaderadmin.getController();
+                        ac.setAdmin(user);
 
 
                         button_login.getScene().setRoot(admin);

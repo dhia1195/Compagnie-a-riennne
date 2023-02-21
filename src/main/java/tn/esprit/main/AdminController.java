@@ -48,6 +48,16 @@ public class AdminController implements Initializable {
 
 
     ServiceUser su = new ServiceUser();
+    public void setAdmin(User u) {
+
+
+
+
+
+
+
+
+    }
 
     @FXML
     private void refreshTable() {
@@ -55,9 +65,9 @@ public class AdminController implements Initializable {
             List<User> user = su.selectAll();
             ObservableList<User> observableArrayList = FXCollections.observableArrayList(su.selectAll());
             usersTable.setItems(observableArrayList);
-            } catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
-    }}
+        }}
 
 
 

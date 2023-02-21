@@ -39,10 +39,8 @@ public class ClientController implements Initializable {
     private Label pass_conf;
 
     public void setClient(User u) {
-        username.setText(u.getNom());
-        nom.setText(u.getNom());
-        prenom.setText(u.getNom());
-        email.setText(u.getNom());
+
+
 
 
 
