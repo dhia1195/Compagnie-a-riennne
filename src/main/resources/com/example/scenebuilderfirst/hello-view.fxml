@@ -38,7 +38,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-          <Button fx:id="ajout" layoutX="21.0" layoutY="223.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="26.0" prefWidth="158.0" style="-fx-background-color: #e0e4ffef0;" text="Ajouter">
+          <Button fx:id="ajout" layoutX="21.0" layoutY="223.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0" text="Ajouter">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -48,12 +48,12 @@
                   <Image url="@assets/logo.png" />
                </image>
             </ImageView>
-          <Button fx:id="modifier" layoutX="22.0" layoutY="264.0" mnemonicParsing="false" onAction="#modifier" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #e0e4ffef0;" text="Modifier">
+          <Button fx:id="modifier" layoutX="22.0" layoutY="264.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="156.0" text="Modifier">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
             </Button>
-          <Button fx:id="suppression" layoutX="17.0" layoutY="320.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="28.0" prefWidth="165.0" style="-fx-background-color: #e0e4ffef0;" text="Supprimer">
+          <Button fx:id="suppression" layoutX="17.0" layoutY="320.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="165.0" text="Supprimer">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>

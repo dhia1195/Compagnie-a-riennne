@@ -18,7 +18,7 @@ public class ServiceEscale implements IService<Escale> {
     }
 
     @Override
-    public void createOne1(Escale escale) throws SQLException {
+    public void createOne(Escale escale) throws SQLException {
         String req = "INSERT INTO `escale`(`id_escale`, `aero_escale`, `heure_depart`, `heure_arrivee`, `jour_escale`) VALUES (?,?,?,?,?)";
         PreparedStatement st = cnx.prepareStatement(req);
         st.setInt(1, escale.getId_escale());
@@ -85,7 +85,7 @@ public class ServiceEscale implements IService<Escale> {
 
     @Override
     public Escale FindById(int id) throws SQLException {
-        String req="SELECT * FROM `escale` WHERE `id`=?";
+        String req="SELECT * FROM `escale` WHERE `id_escale`=?";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setInt(1,id);
         ResultSet rs = ps.executeQuery();

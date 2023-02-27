@@ -19,18 +19,18 @@ public class ServiceVol implements IService<Vol> {
     }
 
     @Override
-    public void createOne1(Vol vol) throws SQLException {
-        String req = "INSERT INTO `vol`(`id_vol`, `num_vol`, `aero_depart`, `aero_arrivee`, `jour_vol`, `heure_depart`, `heure_arrivee`, `id_avion`, `id_escale`) VALUES (?,?,?,?,?,?,?,?,?)";
+    public void createOne(Vol vol) throws SQLException {
+        String req = "INSERT INTO `vol`( `num_vol`, `aero_depart`, `aero_arrivee`, `jour_vol`, `heure_depart`, `heure_arrivee`, `id_avion`, `id_escale`) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement st = cnx.prepareStatement(req);
-        st.setInt(1, vol.getId_vol());
-        st.setInt(2, vol.getNum_vol());
-        st.setString(3, vol.getAero_depart());
-        st.setString(4, vol.getAero_arrivee());
-        st.setString(5, vol.getJour_vol());
-        st.setString(6, vol.getHeure_depart());
-        st.setString(7, vol.getHeure_arrivee());
-        st.setInt(8, vol.getId_avion());
-        st.setInt(9, vol.getEscale().getId_escale());
+
+        st.setInt(1, vol.getNum_vol());
+        st.setString(2, vol.getAero_depart());
+        st.setString(3, vol.getAero_arrivee());
+        st.setString(4, vol.getJour_vol());
+        st.setString(5, vol.getHeure_depart());
+        st.setString(6, vol.getHeure_arrivee());
+        st.setInt(7, vol.getId_avion());
+        st.setInt(8, vol.getEscale().getId_escale());
         st.executeUpdate();
         System.out.println("trajet ajouté !");
     }
