@@ -71,12 +71,12 @@ public class LoginController implements Initializable {
                         Parent root= null;
                         try {
                             root = loader.load();
-                        } catch (IOException e) {
+                            ClientController cc=loader.getController();
+                            cc.setClient(user);
+                        } catch (IOException | SQLException e) {
                             throw new RuntimeException(e);
                         }
 
-                        ClientController cc=loader.getController();
-                        cc.setClient(user);
                         button_login.getScene().setRoot(root);
 
 

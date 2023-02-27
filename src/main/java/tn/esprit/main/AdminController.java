@@ -8,15 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import tn.esprit.jdbc.entities.Role;
 import tn.esprit.jdbc.entities.User;
+import tn.esprit.jdbc.services.ServiceRole;
 import tn.esprit.jdbc.services.ServiceUser;
 
 import java.io.IOException;
@@ -39,6 +38,8 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<User, String> sexeCol;
     @FXML
+    private TableColumn<User, Role> roleCol;
+    @FXML
     private TableColumn<User, String> editCol;
     @FXML
     private Button logout_button;
@@ -48,6 +49,7 @@ public class AdminController implements Initializable {
 
 
     ServiceUser su = new ServiceUser();
+    ServiceRole sr = new ServiceRole();
     public void setAdmin(User u) {
 
 
@@ -57,6 +59,62 @@ public class AdminController implements Initializable {
 
 
 
+    }
+
+
+    public class RoleCell extends TableCell<User, Role> {
+        private ChoiceBox<Role> choiceBox;
+
+        public RoleCell() throws SQLException {
+            choiceBox = new ChoiceBox<>();
+            choiceBox.getItems().addAll(sr.selectAll());
+            choiceBox.setOnAction(event -> {
+                commitEdit(choiceBox.getValue());
+                try {
+                    User user = getTableView().getItems().get(getIndex());
+                    su.updateRole(user.getId(),choiceBox.getValue().getId());
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+            });
+            choiceBox.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    commitEdit(choiceBox.getValue());
+                }
+            });
+        }
+
+        @Override
+        protected void updateItem(Role item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty) {
+                setGraphic(null);
+            } else {
+                choiceBox.setValue(item);
+                setGraphic(choiceBox);
+
+
+            }
+        }
+
+        @Override
+        public void startEdit() {
+            super.startEdit();
+            choiceBox.setValue(getItem());
+            setGraphic(choiceBox);
+
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+            setGraphic(null);
+        }
     }
 
     @FXML
@@ -99,8 +157,22 @@ public class AdminController implements Initializable {
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         sexeCol.setCellValueFactory(new PropertyValueFactory<>("sexe"));
+
+
+        roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
+
+        roleCol.setCellFactory(column -> {
+            try {
+                return new RoleCell();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
         editCol.setCellFactory(column -> {
             TableCell<User, String> cell = new TableCell<>() {
+
+
                 private final Button deleteBtn = new Button("delete");
 
                 // Override the updateItem method to display the button
@@ -112,8 +184,13 @@ public class AdminController implements Initializable {
                     } else {
                         setGraphic(deleteBtn);
                     }
+
                     deleteBtn.setOnMouseClicked((MouseEvent event) -> {
                         try {
+
+
+
+
                             su.deletOne(usersTable.getSelectionModel().getSelectedItem().getId());
                             refreshTable();
                         } catch (SQLException e) {
@@ -124,6 +201,7 @@ public class AdminController implements Initializable {
             };
             return cell;
         });
+
 
 
         usersTable.setItems(observableArrayList);

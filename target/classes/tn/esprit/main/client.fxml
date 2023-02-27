@@ -7,8 +7,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.ClientController">
    <children>
-      <Button fx:id="logout_button" layoutX="270.0" layoutY="174.0" mnemonicParsing="false" text="Log Out" />
+      <Button fx:id="logout_button" layoutX="29.0" layoutY="187.0" mnemonicParsing="false" text="Log Out" />
       <Label fx:id="username" layoutX="180.0" layoutY="75.0" text="Label" />
-      <TextField fx:id="nom" layoutX="159.0" layoutY="211.0" />
+      <TextField fx:id="nom" layoutX="225.0" layoutY="71.0" />
+      <TextField fx:id="prenom" layoutX="225.0" layoutY="117.0" />
+      <TextField fx:id="email" layoutX="225.0" layoutY="161.0" />
+      <TextField fx:id="password" layoutX="225.0" layoutY="213.0" />
+      <TextField fx:id="conf_password" layoutX="225.0" layoutY="262.0" />
+      <Button fx:id="modifier" layoutX="448.0" layoutY="313.0" mnemonicParsing="false" text="modifier" />
+      <TextField fx:id="role" layoutX="225.0" layoutY="300.0" />
+      <Label fx:id="email_existe" layoutX="240.0" layoutY="330.0" prefHeight="18.0" prefWidth="127.0" text="Label" />
+      <Label fx:id="pass_conf" layoutX="247.0" layoutY="355.0" prefHeight="18.0" prefWidth="150.0" text="Label" />
    </children>
 </AnchorPane>

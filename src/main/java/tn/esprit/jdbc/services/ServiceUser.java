@@ -32,6 +32,17 @@ public class ServiceUser implements IService<User> {
 
         System.out.println("Person ajouté !");
     }
+    public void updateRole(int id_user,int id_role)throws SQLException{
+        String req="UPDATE `user` SET `user_role`=? WHERE id_user=?";
+        User trueUser = findById(id_user);
+        PreparedStatement st = cnx.prepareStatement(req);
+        trueUser.setRole(sr.findById(id_role));
+        st.setInt(1,id_role );
+        st.setInt(2, id_user);
+        st.executeUpdate();
+
+
+    }
 
     @Override
     public void updateOne(User user,int id) throws SQLException {
@@ -48,7 +59,7 @@ public class ServiceUser implements IService<User> {
             trueUser.setPassword(user.getPassword());
         if (!trueUser.getSexe().equals(user.getSexe()))
             trueUser.setSexe(user.getSexe());
-        if (!trueUser.getRole().equals(user.getRole()))
+        if (!trueUser.getRole().equals(""))
             trueUser.setRole(user.getRole());
 
         st.setString(1, trueUser.getNom());
