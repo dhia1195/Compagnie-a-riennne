@@ -1,5 +1,4 @@
 package tn.esprit.main;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,15 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.services.ServiceUser;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
-
-
 public class ClientController implements Initializable {
     @FXML
     private Button logout_button;
@@ -57,20 +53,7 @@ public class ClientController implements Initializable {
         prenom.setText(u.getPrenom());
         email.setText(u.getEmail());
         user=u;
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         logout_button.setOnAction(logout ->  {
@@ -88,51 +71,32 @@ public class ClientController implements Initializable {
             try {
                 boolean v=true;
                 while (v) {
-
-
-
                     if (!su.findByMail(email.getText()).getEmail().equals(user.getEmail())&&su.findByMail(email.getText()).getId()!=0 ) {
                         v = false;
                         email_existe.setText("email existe deja");
-
                     }
                     else if(!Pattern.compile(EMAIL_PATTERN).matcher(email.getText()).matches()){
                         v = false;
                         email_existe.setText("email invalide");
-
                     }
                     else
                         email_existe.setText("");
-
                     if (!Objects.equals(password.getText(), conf_password.getText())) {
                         v = false;
                         pass_conf.setText("mot de passe n'est pas conforme");
-
                     }
                     else pass_conf.setText("");
-
                     user.setNom(nom.getText());
                     user.setPrenom(prenom.getText());
                     user.setEmail(email.getText());
                     user.setPassword(password.getText());
-
-
-
                     if (v) {
                         su.updateOne(user, user.getId());
-
-
                     }
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-
         } );
-
-
     }
-
 }

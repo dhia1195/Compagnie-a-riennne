@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import tn.esprit.jdbc.API.PasswordResetEmail;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.services.ServiceUser;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -20,10 +22,13 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
-        ServiceUser su=new ServiceUser();
-        su.updateRole(33,3);
+
+    public static void main(String[] args) throws SQLException, MessagingException {
+
         launch();
+
+
+
 
 
     }

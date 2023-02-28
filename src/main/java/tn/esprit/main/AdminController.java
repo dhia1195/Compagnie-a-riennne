@@ -1,29 +1,22 @@
 package tn.esprit.main;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.util.Callback;
 import tn.esprit.jdbc.entities.Role;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.services.ServiceRole;
 import tn.esprit.jdbc.services.ServiceUser;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
 public class AdminController implements Initializable {
     @FXML
     private TableView<User> usersTable;
@@ -43,11 +36,8 @@ public class AdminController implements Initializable {
     private TableColumn<User, String> editCol;
     @FXML
     private Button logout_button;
-
     @FXML
     private Button fetch;
-
-
     ServiceUser su = new ServiceUser();
     ServiceRole sr = new ServiceRole();
     public void setAdmin(User u) {
@@ -60,11 +50,8 @@ public class AdminController implements Initializable {
 
 
     }
-
-
     public class RoleCell extends TableCell<User, Role> {
         private ChoiceBox<Role> choiceBox;
-
         public RoleCell() throws SQLException {
             choiceBox = new ChoiceBox<>();
             choiceBox.getItems().addAll(sr.selectAll());
@@ -73,14 +60,9 @@ public class AdminController implements Initializable {
                 try {
                     User user = getTableView().getItems().get(getIndex());
                     su.updateRole(user.getId(),choiceBox.getValue().getId());
-
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
-
-
-
             });
             choiceBox.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue) {
@@ -88,7 +70,6 @@ public class AdminController implements Initializable {
                 }
             });
         }
-
         @Override
         protected void updateItem(Role item, boolean empty) {
             super.updateItem(item, empty);
@@ -97,26 +78,20 @@ public class AdminController implements Initializable {
             } else {
                 choiceBox.setValue(item);
                 setGraphic(choiceBox);
-
-
             }
         }
-
         @Override
         public void startEdit() {
             super.startEdit();
             choiceBox.setValue(getItem());
             setGraphic(choiceBox);
-
         }
-
         @Override
         public void cancelEdit() {
             super.cancelEdit();
             setGraphic(null);
         }
     }
-
     @FXML
     private void refreshTable() {
         try {
@@ -126,13 +101,10 @@ public class AdminController implements Initializable {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }}
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            loadDate();
+            load();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -146,21 +118,16 @@ public class AdminController implements Initializable {
             }
             logout_button.getScene().setRoot(root);
         } );
-
     }
-    private void loadDate() throws SQLException {
+    private void load() throws SQLException {
         List<User> user = su.selectAll();
         ObservableList<User> observableArrayList = FXCollections.observableArrayList(su.selectAll());
-
         nameCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenameCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
         passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         sexeCol.setCellValueFactory(new PropertyValueFactory<>("sexe"));
-
-
         roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
-
         roleCol.setCellFactory(column -> {
             try {
                 return new RoleCell();
@@ -171,11 +138,7 @@ public class AdminController implements Initializable {
         });
         editCol.setCellFactory(column -> {
             TableCell<User, String> cell = new TableCell<>() {
-
-
                 private final Button deleteBtn = new Button("delete");
-
-                // Override the updateItem method to display the button
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
@@ -184,14 +147,10 @@ public class AdminController implements Initializable {
                     } else {
                         setGraphic(deleteBtn);
                     }
-
                     deleteBtn.setOnMouseClicked((MouseEvent event) -> {
                         try {
-
-
-
-
-                            su.deletOne(usersTable.getSelectionModel().getSelectedItem().getId());
+                            User user = getTableView().getItems().get(getIndex());
+                            su.deletOne(user.getId());
                             refreshTable();
                         } catch (SQLException e) {
                             e.printStackTrace();
@@ -201,13 +160,6 @@ public class AdminController implements Initializable {
             };
             return cell;
         });
-
-
-
         usersTable.setItems(observableArrayList);
     }
-
-
-// Add the column to the table view
-
 }
