@@ -32,7 +32,7 @@ public class Siege {
     @Override
     public String toString() {
         return "Siege{" +
-                "ID=" + ID +
+                "Numero=" + ID +
                 ", typesiege='" + typesiege + '\'' +
 
                 '}';

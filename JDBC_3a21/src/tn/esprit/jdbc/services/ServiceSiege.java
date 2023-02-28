@@ -15,7 +15,7 @@ public class ServiceSiege implements IService<Siege> {
 
     @Override
     public void createOne(Siege siege) throws SQLException {
-        String req = "INSERT INTO `siege`(`ID`, `typesiege`)" +
+        String req = "INSERT INTO `siege`(`Numero`, `typesiege`)" +
                 " VALUES ('"+siege.getID()+"', '"+siege.getTypesiege()+"')";
         Statement st = cnx.createStatement();
         st.executeUpdate(req);
@@ -27,15 +27,16 @@ public class ServiceSiege implements IService<Siege> {
     @Override
     public boolean updateOne(Siege siege) throws SQLException {
         if (search(siege)==true){
-            PreparedStatement pre=cnx.prepareStatement("UPDATE `siege` SET ID = ?, siege = ? WHERE `ID`=? ;");
+            PreparedStatement pre=cnx.prepareStatement("UPDATE `siege` SET Numero = ?, typesiege = ?  WHERE Numero=? ;");
             pre.setInt(1,siege.getID());
             pre.setString(2,siege.getTypesiege());
+            pre.setInt(3,siege.getID());
 
 
             pre.executeUpdate();
             return true;}
         else{
-            System.out.println("L'utulisateur n'existe pas");
+            System.out.println("Siege n'existe pas");
             return true;
         }    }
 
@@ -46,7 +47,7 @@ public class ServiceSiege implements IService<Siege> {
         Statement ste =  cnx.createStatement();
         if (search(siege)==true){
             ste = cnx.createStatement();
-            String requeteDelete ="DELETE FROM siege WHERE ID="+ siege.getID()+"";
+            String requeteDelete ="DELETE FROM siege WHERE Numero="+ siege.getID()+"";
             ste.executeUpdate(requeteDelete);}
         else{
             System.out.println("L'siege n'existe pas");
@@ -83,7 +84,7 @@ public class ServiceSiege implements IService<Siege> {
 
             Siege p = new Siege();
 
-            p.setID(rs.getInt(1));
+            p.setID(rs.getInt("Numero"));
             p.setTypesiege(rs.getString("typesiege"));
 
 

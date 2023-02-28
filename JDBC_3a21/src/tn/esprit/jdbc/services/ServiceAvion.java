@@ -35,9 +35,13 @@ public class ServiceAvion implements IService<Avion>{
     @Override
     public boolean updateOne(Avion avion) throws SQLException {
         if (search(avion)==true){
-            PreparedStatement pre=cnx.prepareStatement("UPDATE `avion` SET ID = ?, avion = ? WHERE `ID`=? ;");
+            PreparedStatement pre=cnx.prepareStatement("UPDATE `avion` SET ID = ?, modele = ?,capacite = ?  WHERE ID=? ;");
             pre.setInt(1,avion.getID());
             pre.setString(2,avion.getModele());
+            pre.setInt(3,avion.getCapacite());
+            pre.setInt(4,avion.getID());
+
+
 
 
             pre.executeUpdate();

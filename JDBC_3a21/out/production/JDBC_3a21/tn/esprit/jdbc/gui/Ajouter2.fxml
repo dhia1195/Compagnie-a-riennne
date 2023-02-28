@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="678.0" prefWidth="1101.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.jdbc.gui.Ajouter2">
+   <children>
+      <Button fx:id="bu_ajouter" layoutX="206.0" layoutY="339.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <Button fx:id="bu_modif" layoutX="618.0" layoutY="438.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <Button fx:id="bu_supp" layoutX="800.0" layoutY="438.0" mnemonicParsing="false" onAction="#delete" text="Supprimer" />
+      <TableView fx:id="tab" layoutX="516.0" layoutY="68.0" onMouseClicked="#retrieve" prefHeight="310.0" prefWidth="478.0">
+        <columns>
+          <TableColumn fx:id="id_aff" prefWidth="150.0" text="Matricule" />
+          <TableColumn fx:id="mod_aff" minWidth="0.0" prefWidth="127.0" text="Model" />
+            <TableColumn fx:id="capa_aff" minWidth="0.0" prefWidth="138.0" text="Capacite" />
+        </columns>
+      </TableView>
+      <Label layoutX="19.0" layoutY="104.0" text="Gestion avion:" />
+      <Label layoutX="29.0" layoutY="176.0" text="Matricule:" />
+      <Label layoutX="35.0" layoutY="214.0" text="Modele:" />
+      <Label layoutX="28.0" layoutY="258.0" text="Capacite:" />
+      <TextField fx:id="id_pla" layoutX="99.0" layoutY="159.0" />
+      <TextField fx:id="model_pla" layoutX="88.0" layoutY="201.0" />
+      <TextField fx:id="capacite_pla" layoutX="99.0" layoutY="245.0" />
+      <ImageView fitHeight="258.0" fitWidth="420.0" layoutX="14.0" layoutY="438.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../vuelo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="128.0" fitWidth="142.0" layoutX="-32.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../329895726_585118389780817_1254314138439097387_n.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

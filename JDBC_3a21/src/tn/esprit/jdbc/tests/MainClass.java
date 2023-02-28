@@ -1,7 +1,9 @@
 package tn.esprit.jdbc.tests;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import tn.esprit.jdbc.entities.Avion;
 import tn.esprit.jdbc.entities.Siege;
+import tn.esprit.jdbc.services.ServiceAvion;
 import tn.esprit.jdbc.services.ServiceSiege;
 
 import java.sql.SQLException;
@@ -22,14 +24,15 @@ public class MainClass {
 
         //Avion p = new Avion(600, "boing", 50);
         //ServiceAvion sp = new ServiceAvion();
-        Siege p = new Siege(700, "boing");
+        Siege p = new Siege(701, "boing");
         ServiceSiege sp = new ServiceSiege();
 
         try {
-            //sp.createOne(p);
-            //System.out.println(sp.selectAll());
-            sp.deletOne(p);
+            //sp.updateOne(p);
+            sp.createOne(p);
             System.out.println(sp.selectAll());
+          // sp.deletOne(p);
+            //System.out.println(sp.selectAll());
 
                     } catch (SQLException e) {
             System.out.println(e.getMessage());
