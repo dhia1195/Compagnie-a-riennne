@@ -92,7 +92,7 @@ public class AdminController implements Initializable {
             setGraphic(null);
         }
     }
-    @FXML
+
     private void refreshTable() {
         try {
             List<User> user = su.selectAll();

@@ -92,6 +92,14 @@ public class ClientController implements Initializable {
                     user.setPassword(password.getText());
                     if (v) {
                         su.updateOne(user, user.getId());
+                        FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
+                        Parent root= null;
+                        try {
+                            root = loader.load();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        modifier.getScene().setRoot(root);
                     }
                 }
             } catch (SQLException e) {
