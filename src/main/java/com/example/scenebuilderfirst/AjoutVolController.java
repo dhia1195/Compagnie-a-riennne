@@ -58,13 +58,33 @@ public class AjoutVolController implements Initializable {
     @FXML
     private Button valide;
 
-ServiceEscale se = new ServiceEscale();
+    @FXML
+    void valideButtonClicked(ActionEvent event) {
+
+
+    }
+
+
+    ServiceEscale se = new ServiceEscale();
 
 ServiceVol sv = new ServiceVol();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        valide.setOnAction(validation-> {
+        nul.setOnAction(event -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            nul.getScene().setRoot(root);
+        });
+
+        valide.setOnAction(validation -> {
             try {
                 Escale w = se.FindById(parseInt(id_esc.getText()));
                 Vol v = new Vol();
@@ -77,16 +97,17 @@ ServiceVol sv = new ServiceVol();
                 v.setId_avion(parseInt(id_av.getText()));
                 v.setEscale(w);
                 sv.createOne(v);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Succès");
+                alert.setHeaderText("Les données ont été validées avec succès !");
+                alert.showAndWait();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
 
-
-
-
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("hello-view.fxml"));
-            Parent root= null;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent root = null;
             try {
                 root = loader.load();
             } catch (IOException e) {
@@ -95,14 +116,51 @@ ServiceVol sv = new ServiceVol();
             valide.getScene().setRoot(root);
 
 
+        });
+        valide.setOnAction(validation -> {
+            String errorMsg = "";
+
+            if (num_vol.getText().isEmpty()) {
+                errorMsg += "Le champ Numéro de vol est obligatoire.\n";
+            }
+            if (aero_arr.getText().isEmpty()) {
+                errorMsg += "Le champ Aéroport d'arrivée est obligatoire.\n";
+            }
+            if (aero_dep.getText().isEmpty()) {
+                errorMsg += "Le champ Aéroport de départ est obligatoire.\n";
+            }
+            if (j_vol.getText().isEmpty()) {
+                errorMsg += "Le champ Jour de vol est obligatoire.\n";
+            }
+            if (h_arr.getText().isEmpty()) {
+                errorMsg += "Le champ Heure d'arrivée est obligatoire.\n";
+            }
+            if (h_dep.getText().isEmpty()) {
+                errorMsg += "Le champ Heure de départ est obligatoire.\n";
+            }
+            if (id_av.getText().isEmpty()) {
+                errorMsg += "Le champ ID de l'avion est obligatoire.\n";
+            }
+            if (id_esc.getText().isEmpty()) {
+                errorMsg += "Le champ ID de l'escale est obligatoire.\n";
+            }
+
+            if (!errorMsg.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur de saisie");
+                alert.setHeaderText("Les champs suivants sont obligatoires :");
+                alert.setContentText(errorMsg);
+                alert.showAndWait();
+                return;
+            }
 
 
         });
-    }
+    }}
 
 
 
-}
+
 
 
 

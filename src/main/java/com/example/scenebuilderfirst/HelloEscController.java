@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class HelloEsc implements Initializable {
+public class HelloEscController implements Initializable {
     @FXML
     private Button aj;
 
@@ -35,6 +35,31 @@ public class HelloEsc implements Initializable {
                 }
                 aj.getScene().setRoot(root);
             });
+
+        mod.setOnAction(event -> {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("ajouterescale.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            mod.getScene().setRoot(root);
+        });
+        supp.setOnAction(event -> {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("ajouterescale.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            supp.getScene().setRoot(root);
+        });
 
     }
 }

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-esc.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ajoutervol.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 569, 400);
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -23,19 +23,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        ServiceEscale se = new ServiceEscale();
-        ServiceVol sv = new ServiceVol();
-        Escale t = new Escale(30,"h","hh","hhh","hhhh");
-        Vol v = new Vol(1,"a","aa","aa","aa","aa",23,t);
-
-        try {
 
 
-            System.out.println(se.selectAll());
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
         launch();}
 
 

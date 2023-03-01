@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,21 +23,22 @@ public class HelloController implements Initializable {
 
     @FXML
     private Button suppression;
-
     @FXML
-    void ajouter(ActionEvent event) {
+    void modify(ActionEvent event) {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("listesVol.fxml"));
+        Parent root= null;
+        try {
+            root = loader.load();
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        modifier.getScene().setRoot(root);
 
     }
 
-    @FXML
-    void modifier(ActionEvent event) {
 
-    }
-
-    @FXML
-    void supprimer(ActionEvent event) {
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,6 +55,23 @@ public class HelloController implements Initializable {
             ajout.getScene().setRoot(root);
         });
 
+        suppression.setOnAction(event -> {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("listesVol.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            suppression.getScene().setRoot(root);
+        });
+
 
     }
+
+
+
+
 }
