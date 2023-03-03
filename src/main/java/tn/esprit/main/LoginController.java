@@ -84,7 +84,17 @@ public class LoginController implements Initializable {
 
                         break;
                     case "chauffeur":
-                        System.out.println("chauffeur");
+                        FXMLLoader loaderch=new FXMLLoader(getClass().getResource("chauffeur.fxml"));
+                        root= null;
+                        try {
+                            root = loaderch.load();
+                            ChauffeurController chc=loaderch.getController();
+                            chc.setChauffeur(user);
+                        } catch (IOException | SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                        button_login.getScene().setRoot(root);
                         break;
 
                 }

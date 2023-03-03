@@ -67,7 +67,7 @@ public class ClientController implements Initializable {
             logout_button.getScene().setRoot(root);
         } );
 
-        modifier.setOnAction(logout ->  {
+        modifier.setOnAction(edit ->  {
             try {
                 boolean v=true;
                 while (v) {

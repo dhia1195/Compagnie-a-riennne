@@ -38,8 +38,15 @@ public class AdminController implements Initializable {
     private Button logout_button;
     @FXML
     private Button fetch;
+    @FXML
+    private TextField search_field;
     ServiceUser su = new ServiceUser();
     ServiceRole sr = new ServiceRole();
+    private  List<User> user = su.selectAll();
+
+    public AdminController() throws SQLException {
+    }
+
     public void setAdmin(User u) {
 
 
@@ -95,7 +102,6 @@ public class AdminController implements Initializable {
 
     private void refreshTable() {
         try {
-            List<User> user = su.selectAll();
             ObservableList<User> observableArrayList = FXCollections.observableArrayList(su.selectAll());
             usersTable.setItems(observableArrayList);
         } catch (SQLException ex) {
@@ -108,6 +114,17 @@ public class AdminController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        search_field.setOnKeyTyped(recherche -> {
+            try {
+
+                user=su.rechercheBy(search_field.getText());
+                load();
+                if (search_field.getText().isEmpty())
+                    refreshTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
         logout_button.setOnAction(logout ->  {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root= null;
@@ -120,8 +137,8 @@ public class AdminController implements Initializable {
         } );
     }
     private void load() throws SQLException {
-        List<User> user = su.selectAll();
-        ObservableList<User> observableArrayList = FXCollections.observableArrayList(su.selectAll());
+
+        ObservableList<User> observableArrayList = FXCollections.observableArrayList(user);
         nameCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenameCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));

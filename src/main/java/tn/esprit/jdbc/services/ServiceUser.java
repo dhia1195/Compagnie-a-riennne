@@ -124,6 +124,34 @@ public class ServiceUser implements IService<User> {
         return u;
 
     }
+    public List<User> rechercheBy(String nom) throws SQLException{
+     List<User> temp = new ArrayList<>();
+     String req="SELECT * FROM user WHERE nom LIKE ? OR email LIKE ?";
+        PreparedStatement st = cnx.prepareStatement((req));
+        st.setString(1,nom);
+        st.setString(2,nom);
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()){
+
+            User p = new User();
+
+            p.setId(rs.getInt("id_user"));
+            p.setNom(rs.getString("nom"));
+            p.setPrenom(rs.getString("prenom"));
+            p.setEmail(rs.getString("email"));
+            p.setPassword(rs.getString("password"));
+            p.setSexe(rs.getString("sexe"));
+            p.setRole(sr.findById(rs.getInt("user_role")));
+
+            temp.add(p);
+
+        }
+
+
+        return temp;
+
+    }
 
     @Override
     public List<User> selectAll() throws SQLException {
@@ -154,6 +182,7 @@ public class ServiceUser implements IService<User> {
 
         return temp;
     }
+
     public User authenticate(String mail, String password) throws SQLException {
         User u =new User();
         String req = "SELECT * FROM `user` Where `email`=? and `password`=?";
