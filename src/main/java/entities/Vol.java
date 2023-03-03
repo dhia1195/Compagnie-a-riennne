@@ -71,8 +71,9 @@ public class Vol {
         return jour_vol;
     }
 
-    public void setJour_vol(String jour_vol) {
+    public String setJour_vol(String jour_vol) {
         this.jour_vol = jour_vol;
+        return jour_vol;
     }
 
     public String getHeure_depart() {

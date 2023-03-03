@@ -6,17 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import services.ServiceEscale;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static java.lang.Integer.parseInt;
 
 public class ModifierVolController implements Initializable {
+    @FXML
+    private DatePicker picker;
     @FXML
     private TextField aero_arrmod;
 
@@ -57,6 +63,7 @@ public class ModifierVolController implements Initializable {
     private Button validmod;
 
     static Vol v = null;
+    Vol vl = new Vol();
 ServiceEscale se = new ServiceEscale();
     public void setVol(Vol vol){
         aero_arrmod.setText(vol.getAero_arrivee());
@@ -64,6 +71,8 @@ ServiceEscale se = new ServiceEscale();
         id_avmod.setText(String.valueOf(vol.getId_avion()));
 
         j_volmod.setText(vol.getJour_vol());
+
+
         num_volmod.setText(String.valueOf(vol.getNum_vol()));
         h_arrmod.setText(vol.getHeure_arrivee());
         h_depmod.setText(vol.getHeure_depart());

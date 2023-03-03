@@ -14,6 +14,9 @@ import services.ServiceVol;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static java.lang.Integer.parseInt;
@@ -57,6 +60,8 @@ public class AjoutVolController implements Initializable {
 
     @FXML
     private Button valide;
+    @FXML
+    private DatePicker dt;
 
     @FXML
     void valideButtonClicked(ActionEvent event) {
@@ -91,7 +96,14 @@ ServiceVol sv = new ServiceVol();
                 v.setNum_vol(parseInt(num_vol.getText()));
                 v.setAero_arrivee(aero_arr.getText());
                 v.setAero_depart(aero_dep.getText());
-                v.setJour_vol(j_vol.getText());
+                //v.setJour_vol(j_vol.getText());
+                final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                String getDateVol = v.setJour_vol(dt.getValue().format(NEW_FORMATTER).toString());
+
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+
                 v.setHeure_arrivee(h_arr.getText());
                 v.setHeure_depart(h_dep.getText());
                 v.setId_avion(parseInt(id_av.getText()));
@@ -105,8 +117,7 @@ ServiceVol sv = new ServiceVol();
                 throw new RuntimeException(e);
             }
 
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listesVol.fxml"));
             Parent root = null;
             try {
                 root = loader.load();
@@ -117,45 +128,8 @@ ServiceVol sv = new ServiceVol();
 
 
         });
-        valide.setOnAction(validation -> {
-            String errorMsg = "";
-
-            if (num_vol.getText().isEmpty()) {
-                errorMsg += "Le champ Numéro de vol est obligatoire.\n";
-            }
-            if (aero_arr.getText().isEmpty()) {
-                errorMsg += "Le champ Aéroport d'arrivée est obligatoire.\n";
-            }
-            if (aero_dep.getText().isEmpty()) {
-                errorMsg += "Le champ Aéroport de départ est obligatoire.\n";
-            }
-            if (j_vol.getText().isEmpty()) {
-                errorMsg += "Le champ Jour de vol est obligatoire.\n";
-            }
-            if (h_arr.getText().isEmpty()) {
-                errorMsg += "Le champ Heure d'arrivée est obligatoire.\n";
-            }
-            if (h_dep.getText().isEmpty()) {
-                errorMsg += "Le champ Heure de départ est obligatoire.\n";
-            }
-            if (id_av.getText().isEmpty()) {
-                errorMsg += "Le champ ID de l'avion est obligatoire.\n";
-            }
-            if (id_esc.getText().isEmpty()) {
-                errorMsg += "Le champ ID de l'escale est obligatoire.\n";
-            }
-
-            if (!errorMsg.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de saisie");
-                alert.setHeaderText("Les champs suivants sont obligatoires :");
-                alert.setContentText(errorMsg);
-                alert.showAndWait();
-                return;
-            }
 
 
-        });
     }}
 
 

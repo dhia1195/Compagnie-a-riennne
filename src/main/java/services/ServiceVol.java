@@ -129,4 +129,129 @@ public class ServiceVol implements IService<Vol> {
         return t;
     }
 
-}
+    public List<Vol> selectByDate(String date) throws SQLException {
+        List<Vol> temp = new ArrayList<>();
+
+        String req = "SELECT * FROM `vol` WHERE `jour_vol`=?";
+
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, date);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()){
+
+            Vol t= new Vol();
+
+            t.setId_vol(rs.getInt(1));
+            t.setNum_vol(rs.getInt(2));
+            t.setAero_depart(rs.getString(3));
+            t.setAero_arrivee(rs.getString(4));
+            t.setJour_vol(rs.getString(5));
+            t.setHeure_depart(rs.getString(6));
+            t.setHeure_arrivee(rs.getString(7));
+            t.setId_avion(rs.getInt(8));
+            t.setEscale(se.FindById(rs.getInt(9)));
+
+            temp.add(t);
+
+        }
+
+        return temp;
+    }
+
+    public List<Vol> selectByAeroportDepart(String aeroport) throws SQLException {
+        List<Vol> vols = new ArrayList<>();
+        String req = "SELECT * FROM `vol` WHERE `aero_depart`=?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, aeroport);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Vol vol = new Vol();
+            vol.setId_vol(rs.getInt("id_vol"));
+            vol.setNum_vol(rs.getInt("num_vol"));
+            vol.setAero_depart(rs.getString("aero_depart"));
+            vol.setAero_arrivee(rs.getString("aero_arrivee"));
+            vol.setJour_vol(rs.getString("jour_vol"));
+            vol.setHeure_depart(rs.getString("heure_depart"));
+            vol.setHeure_arrivee(rs.getString("heure_arrivee"));
+            vol.setId_avion(rs.getInt("id_avion"));
+            vol.setEscale(se.FindById(rs.getInt("id_escale")));
+
+            vols.add(vol);
+        }
+
+        return vols;
+    }
+
+    public List<Vol> findByAeroportArrivee(String aeroportArrivee) throws SQLException {
+        List<Vol> vols = new ArrayList<>();
+        String req = "SELECT * FROM vol WHERE aero_arrivee = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, aeroportArrivee);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Vol vol = new Vol();
+            vol.setId_vol(rs.getInt("id_vol"));
+            vol.setNum_vol(rs.getInt("num_vol"));
+            vol.setAero_depart(rs.getString("aero_depart"));
+            vol.setAero_arrivee(rs.getString("aero_arrivee"));
+            vol.setJour_vol(rs.getString("jour_vol"));
+            vol.setHeure_depart(rs.getString("heure_depart"));
+            vol.setHeure_arrivee(rs.getString("heure_arrivee"));
+            vol.setId_avion(rs.getInt("id_avion"));
+            vol.setEscale(se.FindById(rs.getInt("id_escale")));
+            vols.add(vol);
+        }
+        return vols;
+    }
+
+
+
+    public List<String> getAllDate() throws SQLException{
+        List<String> dates = new ArrayList<>();
+        String query = "SELECT DISTINCT jour_vol FROM vol ";
+        Statement statement = cnx.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        while (resultSet.next()) {
+            dates.add(resultSet.getString("jour_vol"));
+        }
+        return dates;}
+
+        public List<Vol> getAll() throws SQLException {
+            List<Vol> temp = new ArrayList<>();
+
+            String req = "SELECT DISTINCT `aero_depart`, `aero_arrivee`, `jour_vol`\n" +
+                    "FROM `vol`\n" +
+                    "WHERE `aero_depart` = 'aero_depart'\n" +
+                    "AND `aero_arrivee` = 'aero_arrivee'\n" +
+                    "AND `jour_vol` = 'jour_vol'  ";
+
+            PreparedStatement ps = cnx.prepareStatement(req);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+
+                Vol t= new Vol();
+
+
+                t.setAero_depart(rs.getString(1));
+                t.setAero_arrivee(rs.getString(2));
+                t.setJour_vol(rs.getString(3));
+
+
+
+
+                temp.add(t);
+
+            }
+
+
+            return temp;
+        }
+
+    }
+
+
