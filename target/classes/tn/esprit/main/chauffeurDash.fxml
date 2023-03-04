@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.ChauffeurDashController">
@@ -36,6 +37,7 @@
     </left>
     <center>
         <AnchorPane prefHeight="600.0" prefWidth="855.0" BorderPane.alignment="CENTER">
+            <StackPane fx:id="chartContainer" layoutX="225.0" layoutY="170.0" prefHeight="140.0" prefWidth="226.0" />
 
 
         </AnchorPane>

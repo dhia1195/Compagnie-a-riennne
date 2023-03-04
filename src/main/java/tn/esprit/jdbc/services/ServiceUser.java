@@ -124,6 +124,34 @@ public class ServiceUser implements IService<User> {
         return u;
 
     }
+    public List<User>selectChauffeur() throws SQLException{
+        List<User> temp = new ArrayList<>();
+        String req="SELECT * FROM `user` WHERE `user_role`=?";
+        PreparedStatement st = cnx.prepareStatement((req));
+        st.setInt(1,sr.findByRole("chauffeur").getId());
+
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()){
+
+            User p = new User();
+
+            p.setId(rs.getInt("id_user"));
+            p.setNom(rs.getString("nom"));
+            p.setPrenom(rs.getString("prenom"));
+            p.setEmail(rs.getString("email"));
+            p.setPassword(rs.getString("password"));
+            p.setSexe(rs.getString("sexe"));
+            p.setRole(sr.findById(rs.getInt("user_role")));
+
+            temp.add(p);
+
+        }
+
+
+        return temp;
+
+    };
     public List<User> rechercheBy(String nom) throws SQLException{
      List<User> temp = new ArrayList<>();
      String req="SELECT * FROM user WHERE nom LIKE ? OR email LIKE ?";

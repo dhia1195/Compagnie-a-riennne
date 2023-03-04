@@ -1,10 +1,13 @@
 package tn.esprit.main;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import tn.esprit.jdbc.entities.Role;
 import tn.esprit.jdbc.services.ServiceUser;
 import tn.esprit.jdbc.entities.User;
@@ -14,7 +17,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginController  implements Initializable {
 
     @FXML
     private Button button_login;
@@ -23,17 +26,35 @@ public class LoginController implements Initializable {
     @FXML
     private TextField  login_mail;
     @FXML
-    private TextField  login_password;
+    private PasswordField  login_password;
     @FXML
     private Label errorMessageLabel;
+    @FXML
+    private Button forget;
+
 
 
     ServiceUser sp = new ServiceUser();
+    public void openForgetPassScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("forgetPass.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Stage stage = new Stage();
+        stage.setTitle("Forgot Password");
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        forget.setOnAction(ps->{
+            try {
+                openForgetPassScene();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
         button_login.setOnAction(login -> {
             String mail = login_mail.getText();
             String password = login_password.getText();
@@ -105,6 +126,7 @@ public class LoginController implements Initializable {
 
             }
         });
+
         button_registre.setOnAction(registre ->{
             FXMLLoader loader=new FXMLLoader(getClass().getResource("signup.fxml"));
             Parent root= null;
