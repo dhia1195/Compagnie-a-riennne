@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="805.0" prefWidth="1182.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.jdbc.gui.Ajouter2">
+   <children>
+      <Button fx:id="bu_ajouter" layoutX="206.0" layoutY="339.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <Button fx:id="bu_modif" layoutX="821.0" layoutY="378.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <Button fx:id="bu_supp" layoutX="922.0" layoutY="378.0" mnemonicParsing="false" onAction="#delete" text="Supprimer" />
+      <TableView fx:id="tab" layoutX="516.0" layoutY="68.0" onMouseClicked="#retrieve" prefHeight="310.0" prefWidth="478.0">
+        <columns>
+          <TableColumn fx:id="id_aff" prefWidth="150.0" text="Matricule" />
+          <TableColumn fx:id="mod_aff" minWidth="0.0" prefWidth="164.0" text="Model" />
+            <TableColumn fx:id="capa_aff" minWidth="0.0" prefWidth="162.0" text="Capacite" />
+        </columns>
+      </TableView>
+      <Label layoutX="19.0" layoutY="104.0" text="Gestion avion:" />
+      <Label layoutX="29.0" layoutY="176.0" text="Matricule:" />
+      <Label layoutX="35.0" layoutY="214.0" text="Modele:" />
+      <Label layoutX="28.0" layoutY="258.0" text="Capacite:" />
+      <TextField fx:id="id_pla" layoutX="99.0" layoutY="172.0" />
+      <TextField fx:id="model_pla" layoutX="99.0" layoutY="210.0" />
+      <TextField fx:id="capacite_pla" layoutX="99.0" layoutY="254.0" />
+      <ImageView fitHeight="258.0" fitWidth="420.0" layoutX="-4.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../vuelo.jpg" />
+         </image>
+      </ImageView>
+
+      <ImageView fitHeight="128.0" fitWidth="142.0" layoutX="-32.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../329895726_585118389780817_1254314138439097387_n.jpg" />
+         </image>
+      </ImageView>
+      <PieChart fx:id="pieChart" layoutX="704.0" layoutY="477.0" prefHeight="346.0" prefWidth="464.0" />
+
+   </children>
+</AnchorPane>
