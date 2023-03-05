@@ -19,13 +19,13 @@ public class ServiceEscale implements IService<Escale> {
 
     @Override
     public void createOne(Escale escale) throws SQLException {
-        String req = "INSERT INTO `escale`(`id_escale`, `aero_escale`, `heure_depart`, `heure_arrivee`, `jour_escale`) VALUES (?,?,?,?,?)";
+        String req = "INSERT INTO `escale`( `aero_escale`, `heure_depart`, `heure_arrivee`, `jour_escale`) VALUES (?,?,?,?)";
         PreparedStatement st = cnx.prepareStatement(req);
-        st.setInt(1, escale.getId_escale());
-        st.setString(2, escale.getAero_escale());
-        st.setString(3, escale.getHeure_depart());
-        st.setString(4, escale.getHeure_arrivee());
-        st.setString(5, escale.getJour_escale());
+
+        st.setString(1, escale.getAero_escale());
+        st.setString(2, escale.getHeure_depart());
+        st.setString(3, escale.getHeure_arrivee());
+        st.setString(4, escale.getJour_escale());
         st.executeUpdate();
         System.out.println("escale ajouté !");
     }

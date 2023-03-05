@@ -8,12 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import services.ServiceEscale;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AjoutEscController implements Initializable {
@@ -31,6 +35,9 @@ public class AjoutEscController implements Initializable {
 
     @FXML
     private TextField j_esc;
+    @FXML
+    private DatePicker dpicker;
+
 
     @FXML
     private Button val;
@@ -61,7 +68,12 @@ public class AjoutEscController implements Initializable {
                 es.setAero_escale(aero_esc.getText());
                 es.setHeure_depart(h_dep.getText());
                 es.setHeure_arrivee(h_arr.getText());
-                es.setJour_escale(j_esc.getText());
+               // es.setJour_escale(j_esc.getText());
+                final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+                String getDateEscale = es.setJour_escale(dpicker.getValue().format(NEW_FORMATTER).toString());
+
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 se.createOne(es);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succès");
@@ -72,7 +84,7 @@ public class AjoutEscController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("hello-esc.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("ajoutervol.fxml"));
             Parent root= null;
             try {
                 root = loader.load();

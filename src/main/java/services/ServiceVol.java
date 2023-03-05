@@ -219,16 +219,19 @@ public class ServiceVol implements IService<Vol> {
         }
         return dates;}
 
-        public List<Vol> getAll() throws SQLException {
+        public List<Vol> getAll(String aero_depart, String aero_arrivee, String jour_vol ) throws SQLException {
             List<Vol> temp = new ArrayList<>();
 
-            String req = "SELECT DISTINCT `aero_depart`, `aero_arrivee`, `jour_vol`\n" +
-                    "FROM `vol`\n" +
-                    "WHERE `aero_depart` = 'aero_depart'\n" +
-                    "AND `aero_arrivee` = 'aero_arrivee'\n" +
-                    "AND `jour_vol` = 'jour_vol'  ";
+            String req = "SELECT DISTINCT `aero_depart`, `aero_arrivee`, `jour_vol`" +
+                    "FROM `vol`" +
+                    "WHERE `aero_depart` = ?" +
+                    "AND `aero_arrivee` = ?" +
+                    "AND `jour_vol` = ?  ";
 
             PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1,aero_depart);
+            ps.setString(2,aero_arrivee);
+            ps.setString(3,jour_vol);
 
             ResultSet rs = ps.executeQuery();
 

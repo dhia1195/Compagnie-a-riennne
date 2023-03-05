@@ -37,7 +37,7 @@ public class HelloEscController implements Initializable {
             });
 
         mod.setOnAction(event -> {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("ajouterescale.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("modifesc.fxml"));
             Parent root= null;
             try {
                 root = loader.load();

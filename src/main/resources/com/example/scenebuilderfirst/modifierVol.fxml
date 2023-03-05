@@ -69,7 +69,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="400.0" prefWidth="366.0" style="-fx-background-color: #B0E0E6;">
+            <AnchorPane prefHeight="394.0" prefWidth="377.0" style="-fx-background-color: #B0E0E6;">
                <children>
                   <Label alignment="CENTER" layoutX="114.0" layoutY="6.0" prefHeight="18.0" prefWidth="114.0" text="Modifier Vol" />
                   <Label layoutX="14.0" layoutY="40.0" prefHeight="18.0" prefWidth="93.0" text="num de vol " />

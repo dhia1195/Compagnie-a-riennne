@@ -60,10 +60,12 @@ public class Escale {
         return jour_escale;
     }
 
-    public void setJour_escale(String jour_escale) {
-        this.jour_escale = jour_escale;
+    public String setJour_escale(String jour_escale) {
+        this.jour_escale= jour_escale;
+        return jour_escale;
     }
 
+   
     @Override
     public String toString() {
         return "Escale{" +
@@ -87,4 +89,6 @@ public class Escale {
     public int hashCode() {
         return Objects.hash(id_escale, aero_escale, heure_depart, heure_arrivee, jour_escale);
     }
+
+
 }

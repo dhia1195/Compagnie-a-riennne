@@ -9,9 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import services.ServiceEscale;
 import services.ServiceVol;
@@ -30,32 +29,44 @@ import static java.lang.Integer.parseInt;
 public class RechercheController implements Initializable {
 
     @FXML
-     private ChoiceBox<String> comboBoxAeroDep;
+    private TableColumn<Vol, String> aeroarr;
+
+    @FXML
+    private TableColumn<Vol, String> aerodep;
+
+    @FXML
+    private Button btrech;
+
     @FXML
     private ChoiceBox<String> comboBoxAeroArr;
 
     @FXML
-    private ChoiceBox<String> comboBoxDate;
-    @FXML
-    private Button btrech;
+    private ChoiceBox<String> comboBoxAeroDep;
 
+    @FXML
+    private ChoiceBox<String> comboBoxDate;
+
+    @FXML
+    private TableColumn<Vol, String> jv;
+
+    @FXML
+    private TableView<Vol> tb;
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         btrech.setOnAction(evet -> {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("listerecherche.fxml"));
-            Parent root= null;
+
             try {
-                root = loader.load();
-
-
-            } catch (IOException e) {
+                load();
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            btrech.getScene().setRoot(root);
+
         });
+
+
 
 
 
@@ -87,6 +98,7 @@ public class RechercheController implements Initializable {
 
 
         });
+
 
 
 
@@ -161,6 +173,17 @@ public class RechercheController implements Initializable {
 
 
     }
+    ServiceVol s = new ServiceVol();
+    public void load() throws SQLException {
+        List<Vol> vol = s.getAll(comboBoxAeroDep.getValue(), comboBoxAeroArr.getValue(),comboBoxDate.getValue());
+        ObservableList<Vol> vlist= FXCollections.observableArrayList(vol);
+        aeroarr.setCellValueFactory(new PropertyValueFactory<>("aero_arrivee"));
+        aerodep.setCellValueFactory(new PropertyValueFactory<>("aero_depart"));
+        jv.setCellValueFactory(new PropertyValueFactory<>("jour_vol"));
+        tb.setItems(vlist);
+
+    }
+
 
 
 
