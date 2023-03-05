@@ -1,6 +1,10 @@
 package tn.esprit.jdbc.gui;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamWriterFactory;
+import com.sun.xml.internal.ws.util.xml.CDATA;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,6 +12,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.jdbc.entities.Avion;
 import tn.esprit.jdbc.entities.Siege;
@@ -15,6 +20,9 @@ import tn.esprit.jdbc.services.ServiceAvion;
 import tn.esprit.jdbc.services.ServiceSiege;
 import tn.esprit.jdbc.utils.MaConnexion;
 
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,11 +43,6 @@ public class AjouterSiege implements Initializable {
     private Button bu_supp1;
     @FXML
     private TextField rechercher;
-
-    @FXML
-    private Button rechButton;
-
-
 
 
     @FXML
@@ -62,7 +65,7 @@ public class AjouterSiege implements Initializable {
     private LineChart linechart;
 
 
-
+    //ObservableList<Siege> masterData = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -102,6 +105,7 @@ public class AjouterSiege implements Initializable {
             }
         }
     }
+
     private void table() {
 
         num_aff1.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -111,7 +115,8 @@ public class AjouterSiege implements Initializable {
         tab1.setItems(RecupBase());
 
     }
-    private ObservableList<Siege> RecupBase () {
+
+    private ObservableList<Siege> RecupBase() {
         ObservableList<Siege> list = FXCollections.observableArrayList();
 
         java.sql.Connection cnx;
@@ -141,8 +146,33 @@ public class AjouterSiege implements Initializable {
         return list;
     }
 
-
-
+    @FXML
+    void rechercher() {
+        try {
+            ObservableList<Siege> list = RecupBase(); // On utilise la fonction RecupBase pour récupérer les données
+            tab1.setItems(list);
+            FilteredList<Siege> listeFilter = new FilteredList<>(list, l -> true);
+            rechercher.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
+                listeFilter.setPredicate(reclamation -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCase = newValue.toLowerCase();
+                    if (reclamation.getTypesiege().toLowerCase().contains(lowerCase)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            SortedList<Siege> sortedData = new SortedList<>(listeFilter);
+            sortedData.comparatorProperty().bind(tab1.comparatorProperty());
+            tab1.setItems(sortedData);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
 @FXML
     void delete(ActionEvent event) {
         Siege siege = tab1.getSelectionModel().getSelectedItem();
@@ -223,7 +253,40 @@ public class AjouterSiege implements Initializable {
 
 
     }
-}
+
+    }
+
+
+    /*@FXML
+    void rechercher(KeyEvent ke) {
+        FilteredList<Siege> filterData = new FilteredList<>(masterData, p -> true);
+        rechercher.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
+            filterData.setPredicate(siege -> {
+
+                if (newvalue == null || newvalue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newvalue.toLowerCase();
+
+                if (siege.getTypesiege().toLowerCase().indexOf(typedText) != -1) {
+
+                    return true;
+                }
+
+
+                return false;
+            });
+            SortedList<Siege> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(tab1.comparatorProperty());
+            tab1.setItems(sortedList);
+
+
+        });
+
+    }*/
+
+
+
 
 
 

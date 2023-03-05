@@ -1,0 +1,8 @@
+.root {
+    -fx-background-color: blue;
+}
+
+/* Set the font color to white */
+.text {
+    -fx-fill: white;
+}

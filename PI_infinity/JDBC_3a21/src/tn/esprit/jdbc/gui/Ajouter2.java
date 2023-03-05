@@ -2,6 +2,8 @@ package tn.esprit.jdbc.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.jdbc.entities.Avion;
+import tn.esprit.jdbc.entities.Siege;
 import tn.esprit.jdbc.services.ServiceAvion;
 import tn.esprit.jdbc.services.StatPiImplemt;
 import tn.esprit.jdbc.utils.MaConnexion;
@@ -56,6 +59,8 @@ public class Ajouter2 implements Initializable {
     private TextField model_pla;
     @FXML
     private TableView<Avion> tab;
+    @FXML
+    private  TextField rechercher;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -179,6 +184,33 @@ public class Ajouter2 implements Initializable {
         }
         return list;
     }
+    @FXML
+    void rechercher() {
+        try {
+            ObservableList<Avion> list = RecupBase(); // On utilise la fonction RecupBase pour récupérer les données
+            tab.setItems(list);
+            FilteredList<Avion> listeFilter = new FilteredList<>(list, l -> true);
+            rechercher.textProperty().addListener((ObservableValue, oldValue, newValue) -> {
+                listeFilter.setPredicate(reclamation -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+                    String lowerCase = newValue.toLowerCase();
+                    if (reclamation.getModele().toLowerCase().contains(lowerCase)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            SortedList<Avion> sortedData = new SortedList<>(listeFilter);
+            sortedData.comparatorProperty().bind(tab.comparatorProperty());
+            tab.setItems(sortedData);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 
     @FXML

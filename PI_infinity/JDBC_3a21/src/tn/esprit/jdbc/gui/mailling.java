@@ -1,174 +1,74 @@
 package tn.esprit.jdbc.gui;
 
-import com.mysql.cj.Session;
-import com.mysql.cj.protocol.Message;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-import com.sun.xml.internal.org.jvnet.mimepull.MIMEMessage;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import sun.rmi.transport.Transport;
-
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
-import java.util.Properties;
-
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert;
-import tn.esprit.jdbc.entities.Avion;
+import javafx.scene.control.Alert.AlertType;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.*;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 public class mailling {
+
     @FXML
-    private TextField mail;
-
-   /* public void sendmail(){
-
-        Properties props=new Properties();
-        props.put("mail.smtp.host","smtp.gmail.com");
-        props.put("mail.smtp.port",465);
-        props.put("mail.smtp.user","");
-        props.put("mail.smtp.auth",true);
-        props.put("mail.smtp.starttls.enable",true);
-        props.put("mail.smtp.debug",true);
-        props.put("mail.smtp.socketFactory.port",465);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.socketFactory.fallback",false);
-
-        try {
-            Session session = Session.getDefaultInstance(props, null);
-            session.setDebug(true);
-            MimeMessage message = new MimeMessage(session);
-            message.setText("Your OTP is " + mail.getText());
-            message.setSubject("OTP For your Neftola Account");
-            message.setFrom(new InternetAddress(""));
-            message.addRecipient(RecipientType.TO, new InternetAddress(Email.getText().trim()));
-            message.saveChanges();
-            try
-            {
-                Avion avion = session.getTransport("smtp");
-                avion.connect("smtp.gmail.com","","");
-                avion.sendMessage(message, message.getAllRecipients());
-                avion.close();
+    private TextField jTextField7;
+@FXML
+private Button d;
+    @FXML
+    private TextField maail;
 
 
+    @FXML
+    public  void Mail( ) throws MessagingException, SQLException {
+        String m=maail.getText();
 
-                JOptionPane.showMessageDialog(null,"OTP has send to your Email id");
-            }catch(Exception e)
-            {
-                JOptionPane.showMessageDialog(null,"Please check your internet connection");
-            }
+        sendmail(m);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null,e);
-        }*/
+
     }
-//    public static void sendEmail(String recipient, String subject, String content) {
-//        try {
-//            // 1. Configuration des propriétés de la session
-//            Properties props = new Properties();
-//            props.put("mail.smtp.host", "smtp.gmail.com");
-//            props.put("mail.smtp.port", "587");
-//            props.put("mail.smtp.auth", "true");
-//            props.put("mail.smtp.starttls.enable", "true");
-//
-//            // 2. Création de la session
-//            Session session = Session.getInstance(props, new Authenticator() {
-//                protected PasswordAuthentication getPasswordAuthentication() {
-//                    return new PasswordAuthentication("your_email_address@gmail.com", "your_email_password");
-//                }
-//            });
-//
-//            // 3. Création de l'objet message
-//            Message message = new MIMEMessage(session);
-//            message.setFrom(new InternetAddress("your_email_address@gmail.com"));
-//            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-//            message.setSubject(subject);
-//            message.setText(content);
-//
-//            // 4. Envoi du message
-//            Transport.send(message);
-//
-//            // 5. Affichage d'une alerte pour informer l'utilisateur que l'e-mail a été envoyé avec succès
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("E-mail envoyé");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Votre e-mail a été envoyé avec succès à " + recipient);
-//            alert.showAndWait();
-//        } catch (Exception e) {
-//            // En cas d'erreur, affichage d'une alerte pour informer l'utilisateur
-//            Alert alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Erreur");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Une erreur s'est produite lors de l'envoi de l'e-mail.\nVeuillez réessayer plus tard.");
-//            alert.showAndWait();
-//            e.printStackTrace();
-//        }
-//    }
 
 
+    public static void sendmail(String recepient) throws MessagingException{
+        System.out.println("Prepared to send email");
+        Properties properties=new Properties();
+        properties.put("mail.smtp.auth","true");
+        properties.put("mail.smtp.starttls.enable","true");
+        properties.put("mail.smtp.host","smtp.gmail.com");
+        properties.put("mail.smtp.port","587");
+        String myEmailAccount="jojo22042000@gmail.com";
+        String password="lcjenhgxppkiqxhc";
+        Session session=Session.getInstance(properties,new Authenticator(){
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(myEmailAccount,password);
+
+            }
+        });
+
+        Message message=prepareMessage(session,myEmailAccount,recepient);
+        Transport.send(message);
+        System.out.println("Message sent succesfully");
+    }
+    private static Message prepareMessage(Session session, String myEmailAccount,String recepient){
+        try {
+            Message message=new MimeMessage(session);
+            message.setFrom(new InternetAddress(myEmailAccount));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("Abonnement CinePro");
+            message.setText("Bonjour cher(e) abonne(é),\n Votre abonnement a été effectué avec succès ! \n Bienvenu(e) parmi nous 🙂");
+            return message;
+        } catch (MessagingException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    public static void sendEmail(String recipient, String subject, String content) throws MessagingException {
-//        Properties props = new Properties();
-//        props.put("mail.smtp.host", "smtp.gmail.com");
-//        props.put("mail.smtp.port", "587");
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//
-//        Session session = Session.getInstance(props, new Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication("dhoudhou24@gmail.com", "");
-//            }
-//        });
-//
-//        Message message = new MIMEMessage(session);
-//        message.equals(new InternetAddress("dhoudhou24@gmail.com"));
-//        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-//        message.setSubject(subject);
-//        message.setText(content);
-//
-//        Transport.send(message);
-
-    /*private String username="dhoudhou24@gmail.com";
-private String password="dhiaboudali1";
-public void envoyer(){}
-
-
-        public static void main (String[] args){
 }
-}*/
