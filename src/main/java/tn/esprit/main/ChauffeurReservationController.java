@@ -20,7 +20,10 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ChauffeurDashController implements Initializable {
+
+
+
+public class ChauffeurReservationController implements Initializable {
     @FXML
     private TableView<ReservationTransport> reservations;
     @FXML
@@ -39,11 +42,10 @@ public class ChauffeurDashController implements Initializable {
     private TableColumn<ReservationTransport,String> destinCol;
 
     @FXML
-    private Button reservation;
-    @FXML
-    private Button mission;
-    @FXML
     private Button fetch;
+    @FXML
+    private Button reservation;
+
     @FXML
     private Button logout_button;
 
@@ -57,16 +59,22 @@ public class ChauffeurDashController implements Initializable {
     private TextField search_field;
     ReservationTservice rt =new ReservationTservice();
     static User user;
+    static int id_u;
+
+
     public void setChauffeur(User u) {
         user=u;
+        id_u=u.getId();
     }
+
+
     private void refreshTable() {
-        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getAvailableReservation());
+        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getByIdChauffeur(id_u));
         reservations.setItems(observableArrayList);
     }
     private void load() throws SQLException {
 
-        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getAvailableReservation());
+        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getByIdChauffeur(id_u));
         destinCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
         DebutCol.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         FinCol.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
@@ -75,19 +83,19 @@ public class ChauffeurDashController implements Initializable {
 
         AjouterCol.setCellFactory(column -> {
             TableCell<ReservationTransport, String> cell = new TableCell<>() {
-                private final Button addBtn = new Button("Ajouter");
+                private final Button supprimBtn = new Button("Supprimer");
                 @Override
                 protected void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        setGraphic(addBtn);
+                        setGraphic(supprimBtn);
                     }
-                    addBtn.setOnMouseClicked((MouseEvent event) -> {
+                    supprimBtn.setOnMouseClicked((MouseEvent event) -> {
                         try {
                             ReservationTransport res=getTableView().getItems().get(getIndex());
-                            rt.addChauffeurTo(user.getId(),res.getId_reservationt());
+                            rt.addChauffeurTo(null,res.getId_reservationt());
                             System.out.println(res.getId_reservationt());
                             refreshTable();
 
@@ -108,17 +116,15 @@ public class ChauffeurDashController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        mission.setOnAction(l->{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("chauffeurReservation.fxml"));
+        reservation.setOnAction(l->{
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("chauffeurDash.fxml"));
             Parent root= null;
             try {
                 root = loader.load();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            ChauffeurReservationController crc=loader.getController();
-            crc.setChauffeur(user);
-            mission.getScene().setRoot(root);
+            reservation.getScene().setRoot(root);
         });
         logout_button.setOnAction(l->{
             FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
@@ -146,6 +152,7 @@ public class ChauffeurDashController implements Initializable {
             }
             logout_button.getScene().setRoot(root);
         });
+
 
     }
 

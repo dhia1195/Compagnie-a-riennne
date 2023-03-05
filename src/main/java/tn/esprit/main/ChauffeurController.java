@@ -38,11 +38,18 @@ public class ChauffeurController implements Initializable {
     @FXML
     private Button boutton_signup;
     @FXML
+    private Button reservation;
+    @FXML
+    private Button mission;
+    @FXML
     private Label email_existe;
     @FXML
     private Label pass_conf;
+    @FXML
+    private Button fetch;
+    @FXML
     ServiceUser su =new ServiceUser();
-    static User user =null;
+    static User user ;
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -56,7 +63,33 @@ public class ChauffeurController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        logout_button.setOnAction(logout ->  {
+        reservation.setOnAction(l->{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("chauffeurDash.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            ChauffeurDashController cdc=loader.getController();
+            cdc.setChauffeur(user);
+            reservation.getScene().setRoot(root);
+        });
+        mission.setOnAction(l->{
+            System.out.println(user.toString());
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("chauffeurReservation.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            ChauffeurReservationController crc=loader.getController();
+            crc.setChauffeur(user);
+            mission.getScene().setRoot(root);
+        });
+        logout_button.setOnAction(l->{
             FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
             Parent root= null;
             try {
@@ -65,7 +98,8 @@ public class ChauffeurController implements Initializable {
                 throw new RuntimeException(e);
             }
             logout_button.getScene().setRoot(root);
-        } );
+        });
+
 
         modifier.setOnAction(edit ->  {
             try {

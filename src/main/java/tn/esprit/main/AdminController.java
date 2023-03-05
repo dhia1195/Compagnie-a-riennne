@@ -39,6 +39,8 @@ public class AdminController implements Initializable {
     @FXML
     private Button fetch;
     @FXML
+    private Button chauffeur;
+    @FXML
     private TextField search_field;
     ServiceUser su = new ServiceUser();
     ServiceRole sr = new ServiceRole();
@@ -114,6 +116,17 @@ public class AdminController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        chauffeur.setOnAction(ch->{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("adminChauffeurDash.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            chauffeur.getScene().setRoot(root);
+
+        });
         search_field.setOnKeyTyped(recherche -> {
             try {
 

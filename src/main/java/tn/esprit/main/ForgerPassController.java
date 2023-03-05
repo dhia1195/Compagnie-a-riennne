@@ -33,15 +33,16 @@ public class ForgerPassController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String email=mail.getText();
+
         envoyer.setOnAction(reset->{
             try {
-                if(su.findByMail(email).getId()!=0){
-                    pr.sendPasswordResetEmail(email,su.findByMail(email));
+                if(su.findByMail(mail.getText()).getId()!=0){
+                    pr.sendPasswordResetEmail(mail.getText(),su.findByMail(mail.getText()));
                     envoyer.getScene().getWindow().hide();
                 }
                 else
-                    erreur.setText("wrong mail");
+                    erreur.setText("wrong email");
+
 
             } catch (SQLException e) {
                 e.printStackTrace();

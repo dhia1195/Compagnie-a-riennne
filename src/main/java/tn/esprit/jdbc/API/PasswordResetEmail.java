@@ -32,7 +32,7 @@ public class PasswordResetEmail {
         message.setFrom(new InternetAddress(senderEmail));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
         message.setSubject(subject);
-        message.setText("Dear"+user.getNom()+",\n\nYou have requested to reset your password. Here is your password:\n\n" + user.getPassword() + "\n\nIf you did not request a password reset, please ignore this email.\n\nBest regards,\nThe Example Team");
+        message.setText("Dear "+user.getNom()+",\n\nYou have requested to reset your password. Here is your password:\n\n" + user.getPassword() + "\n\nIf you did not request a password reset, please ignore this email.\n\nBest regards,\nInfinity Team");
 
         Transport.send(message);
     }

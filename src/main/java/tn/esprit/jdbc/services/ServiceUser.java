@@ -154,11 +154,10 @@ public class ServiceUser implements IService<User> {
     };
     public List<User> rechercheBy(String nom) throws SQLException{
      List<User> temp = new ArrayList<>();
-     String req="SELECT * FROM user WHERE nom LIKE ? OR email LIKE ?";
-        PreparedStatement st = cnx.prepareStatement((req));
-        st.setString(1,nom);
-        st.setString(2,nom);
-        ResultSet rs = st.executeQuery();
+     String req="SELECT * FROM user WHERE nom LIKE '%"+nom+"%' OR email LIKE '%"+nom+"%'";
+        PreparedStatement ps = cnx.prepareStatement(req);
+
+        ResultSet rs = ps.executeQuery();
 
         while (rs.next()){
 

@@ -37,7 +37,7 @@ public class LoginController  implements Initializable {
     ServiceUser sp = new ServiceUser();
     public void openForgetPassScene() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("forgetPass.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 382, 340);
         Stage stage = new Stage();
         stage.setTitle("Forgot Password");
         stage.setScene(scene);
