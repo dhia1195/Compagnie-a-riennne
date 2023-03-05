@@ -41,13 +41,13 @@
     <center>
         <AnchorPane prefHeight="600.0" prefWidth="855.0" BorderPane.alignment="CENTER">
             <children>
-                <TableView fx:id="reservations" layoutX="138.0" layoutY="65.0" prefHeight="200.0" prefWidth="418.0">
+                <TableView fx:id="reservations" layoutX="138.0" layoutY="65.0" prefHeight="200.0" prefWidth="393.0">
                     <columns>
                         <TableColumn fx:id="destinCol" prefWidth="75.0" text="Destination" />
                         <TableColumn fx:id="DebutCol" prefWidth="75.0" text="Date Debut" />
                         <TableColumn fx:id="FinCol" prefWidth="75.0" text="Date Fin" />
                         <TableColumn fx:id="MoyenCol" prefWidth="75.0" text="Moyen T" />
-                        <TableColumn fx:id="AjouterCol" prefWidth="75.0" text="Ajouter" />
+                        <TableColumn fx:id="AjouterCol" prefWidth="88.00006103515625" text="Supprimer" />
                     </columns>
                 </TableView>
             </children></AnchorPane>

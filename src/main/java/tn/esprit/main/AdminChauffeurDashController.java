@@ -31,6 +31,8 @@ public class AdminChauffeurDashController implements Initializable {
     @FXML
     private StackPane chartContainer;
     @FXML
+    private StackPane chartContainer1;
+    @FXML
     private Button fetch;
     @FXML
     private Button chauffeur;
@@ -71,6 +73,8 @@ public class AdminChauffeurDashController implements Initializable {
 
             generateBarChart();
             chartContainer.getChildren().add(barChart);
+            PieChart();
+            chartContainer1.getChildren().add(PieChart());
 
 
 
@@ -78,12 +82,31 @@ public class AdminChauffeurDashController implements Initializable {
             e.printStackTrace();
         }
     }
+    public PieChart PieChart() {
+        ReservationTservice rts=new ReservationTservice();
+
+        int[] counts = new int[0];
+        try {
+            counts = rts.countResWithChauf();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        int countSansChauffer = counts[0];
+        int countAvecChauffeur = counts[1];
+
+        PieChart.Data sansChauffeur = new PieChart.Data("Sans chauffeur", countSansChauffer);
+        PieChart.Data avecChauffeur = new PieChart.Data("Avec chauffeur", countAvecChauffeur);
+
+        PieChart pieChart = new PieChart();
+        pieChart.getData().addAll(avecChauffeur, sansChauffeur);
+
+        return pieChart;
+    }
 
         public void generateBarChart() throws SQLException {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             List<ReservationTransport> rs = null;
             rs = rt.afficheListe();
-
             for (ReservationTransport r : rs) {
                 if (r.getId_chauffeur()!=0) {
                     User user = su.findById(r.getId_chauffeur());
@@ -94,10 +117,6 @@ public class AdminChauffeurDashController implements Initializable {
                 }
             }
 
-
-
-
-
             barChart = new BarChart<>(new CategoryAxis(), new NumberAxis());
             Axis<String> xAxis = barChart.getXAxis();
             Axis<Number> yAxis = barChart.getYAxis();
@@ -105,7 +124,6 @@ public class AdminChauffeurDashController implements Initializable {
             xAxis.setTickLabelsVisible(false);
             barChart.getXAxis().setTickLabelRotation(90);
             yAxis.setLabel("Nombre de mission");
-
             XYChart.Series<String, Number> series = new XYChart.Series<>();
             for (Object columnKey : dataset.getColumnKeys()) {
                 String label = (String) columnKey;
@@ -114,9 +132,7 @@ public class AdminChauffeurDashController implements Initializable {
                 data.setNode(new HoveredThresholdNode((int) (double) dataset.getValue("Nombre de mission", (Comparable<?>) columnKey), label));
                 series.getData().add(data);
             }
-
             barChart.getData().add(series);
-
             barChart.setAnimated(true);
             barChart.setBarGap(0);
             barChart.setCategoryGap(10);

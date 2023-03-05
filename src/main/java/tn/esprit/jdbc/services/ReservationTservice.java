@@ -2,6 +2,7 @@ package tn.esprit.jdbc.services;
 
 
 import tn.esprit.jdbc.entities.ReservationTransport;
+import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.utils.MaConnexion;
 
 import java.sql.Connection;
@@ -184,6 +185,81 @@ public class ReservationTservice implements IServicet<ReservationTransport> {
             System.out.println(ex.getMessage());
         }
 
+    }
+    public int[] countResWithChauf() throws SQLException {
+        String reqSansChauffeur = "SELECT COUNT(*) from `reservationtransport` where `id_chauffeur` is NULL";
+        PreparedStatement psSansChauffeur = cnx.prepareStatement(reqSansChauffeur);
+        ResultSet rsSansChauffeur = psSansChauffeur .executeQuery();
+        rsSansChauffeur.next();
+        int countSansChauffeur = rsSansChauffeur.getInt(1);
+
+        String reqAvecChauffeur = "SELECT COUNT(*) from `reservationtransport` where `id_chauffeur` is Not NULL";
+        PreparedStatement psAvecChauffeur = cnx.prepareStatement(reqAvecChauffeur);
+        ResultSet rsAvecChauffeur = psAvecChauffeur.executeQuery();
+        rsAvecChauffeur.next();
+        int countAvecChauffeur= rsAvecChauffeur.getInt(1);
+
+        return new int[] { countSansChauffeur, countAvecChauffeur };
+    }
+    public List<ReservationTransport> rechercheBy(String des) throws SQLException{
+        List<ReservationTransport> temp = new ArrayList<>();
+        String req="SELECT * FROM reservationtransport \n" +
+                "WHERE (destination LIKE '%"+des+"%' OR date_debut LIKE '%"+des+"%') \n" +
+                "AND id_chauffeur IS NULL";;
+        PreparedStatement ps = cnx.prepareStatement(req);
+
+
+        Statement st = cnx.createStatement();
+
+        ResultSet RS = st.executeQuery(req);
+
+
+        while (RS.next()) {
+            ReservationTransport p = new ReservationTransport();
+            p.setId_reservationt (RS.getInt("id_reservationt"));
+            p.setDestination(RS.getString("destination"));
+            p.setDate_debut(RS.getDate("date_debut"));
+            p.setDate_fin(RS.getDate("date_fin"));
+            p.setStatut_chauffeur(RS.getBoolean("statut_chauffeur"));
+            p.setId_moyent(RS.getInt("id_moyent"));
+            p.setId_chauffeur(RS.getInt("id_chauffeur"));
+
+
+            temp.add(p);
+        }
+
+
+        return temp;
+
+    }
+    public List<ReservationTransport> rechGetByIdChauffeur(int id,String des) {
+        List<ReservationTransport> list = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM reservationtransport  " +
+                    "WHERE (destination LIKE '%"+des+"%' OR date_debut LIKE '%"+des+"%') "+
+                    "AND `id_chauffeur`=?";
+
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+
+            ResultSet RS = ps.executeQuery();
+            while (RS.next()) {
+                ReservationTransport p = new ReservationTransport();
+                p.setId_reservationt (RS.getInt("id_reservationt"));
+                p.setDestination(RS.getString("destination"));
+                p.setDate_debut(RS.getDate("date_debut"));
+                p.setDate_fin(RS.getDate("date_fin"));
+                p.setStatut_chauffeur(RS.getBoolean("statut_chauffeur"));
+                p.setId_moyent(RS.getInt("id_moyent"));
+                p.setId_chauffeur(RS.getInt("id_chauffeur"));
+
+
+                list.add(p);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return list;
     }
 
 }

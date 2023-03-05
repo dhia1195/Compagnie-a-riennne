@@ -18,6 +18,7 @@ import tn.esprit.jdbc.services.ReservationTservice;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -44,6 +45,8 @@ public class ChauffeurReservationController implements Initializable {
     @FXML
     private Button fetch;
     @FXML
+    private Button mission;
+    @FXML
     private Button reservation;
 
     @FXML
@@ -62,19 +65,22 @@ public class ChauffeurReservationController implements Initializable {
     static int id_u;
 
 
+
     public void setChauffeur(User u) {
         user=u;
         id_u=u.getId();
     }
 
 
+
     private void refreshTable() {
+
         ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getByIdChauffeur(id_u));
         reservations.setItems(observableArrayList);
     }
-    private void load() throws SQLException {
+    private void load(List<ReservationTransport> res) throws SQLException {
 
-        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getByIdChauffeur(id_u));
+        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(res);
         destinCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
         DebutCol.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         FinCol.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
@@ -112,7 +118,7 @@ public class ChauffeurReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            load();
+            load(rt.getByIdChauffeur(id_u));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,6 +157,21 @@ public class ChauffeurReservationController implements Initializable {
                 e.printStackTrace();
             }
             logout_button.getScene().setRoot(root);
+        });
+        mission.setOnAction(l->{
+            refreshTable();
+
+        });
+        search_field.setOnKeyTyped(recherche -> {
+            try {
+
+
+                load(rt.rechGetByIdChauffeur(id_u,search_field.getText()));
+                if (search_field.getText().isEmpty())
+                    refreshTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
 
 

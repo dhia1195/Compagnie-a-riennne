@@ -155,7 +155,6 @@ public class AdminController implements Initializable {
         nameCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenameCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         sexeCol.setCellValueFactory(new PropertyValueFactory<>("sexe"));
         roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
         roleCol.setCellFactory(column -> {

@@ -18,6 +18,7 @@ import tn.esprit.jdbc.services.ReservationTservice;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChauffeurDashController implements Initializable {
@@ -57,16 +58,19 @@ public class ChauffeurDashController implements Initializable {
     private TextField search_field;
     ReservationTservice rt =new ReservationTservice();
     static User user;
+
     public void setChauffeur(User u) {
         user=u;
     }
     private void refreshTable() {
+
         ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getAvailableReservation());
         reservations.setItems(observableArrayList);
     }
-    private void load() throws SQLException {
 
-        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(rt.getAvailableReservation());
+    private void load( List<ReservationTransport> res) throws SQLException {
+
+        ObservableList<ReservationTransport> observableArrayList = FXCollections.observableArrayList(res);
         destinCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
         DebutCol.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
         FinCol.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
@@ -104,7 +108,7 @@ public class ChauffeurDashController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            load();
+            load(rt.getAvailableReservation());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,6 +149,21 @@ public class ChauffeurDashController implements Initializable {
                 e.printStackTrace();
             }
             logout_button.getScene().setRoot(root);
+        });
+        reservation.setOnAction(l->{
+           refreshTable();
+
+        });
+        search_field.setOnKeyTyped(recherche -> {
+            try {
+
+
+                load(rt.rechercheBy(search_field.getText()));
+                if (search_field.getText().isEmpty())
+                    refreshTable();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         });
 
     }

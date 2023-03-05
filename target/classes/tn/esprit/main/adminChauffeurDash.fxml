@@ -38,7 +38,8 @@
     </left>
     <center>
         <AnchorPane prefHeight="600.0" prefWidth="855.0" BorderPane.alignment="CENTER">
-            <StackPane fx:id="chartContainer" layoutX="113.0" layoutY="101.0" prefHeight="327.0" prefWidth="424.0" />
+            <StackPane fx:id="chartContainer" layoutX="35.0" layoutY="141.0" prefHeight="246.0" prefWidth="272.0" />
+         <StackPane fx:id="chartContainer1" layoutX="394.0" layoutY="141.0" prefHeight="246.0" prefWidth="272.0" />
 
 
         </AnchorPane>

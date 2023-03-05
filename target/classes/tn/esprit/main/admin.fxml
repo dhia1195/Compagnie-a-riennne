@@ -39,15 +39,14 @@
     </left>
     <center>
         <AnchorPane prefHeight="600.0" prefWidth="855.0" BorderPane.alignment="CENTER">
-            <TableView fx:id="usersTable" layoutX="79.0" layoutY="42.0" prefHeight="222.0" prefWidth="540.0">
+            <TableView fx:id="usersTable" layoutX="132.0" layoutY="42.0" prefHeight="277.0" prefWidth="436.0">
                 <columns>
                     <TableColumn fx:id="nameCol" maxWidth="150.0" minWidth="60.0" prefWidth="60.0" text="Nom" />
                     <TableColumn fx:id="prenameCol" maxWidth="197.33340454101562" minWidth="76.79998779296875" prefWidth="76.79998779296875" text="Prénom" />
                     <TableColumn fx:id="emailCol" maxWidth="232.5333251953125" minWidth="96.26663208007812" prefWidth="98.39999389648438" text="E-mail" />
-                    <TableColumn fx:id="passwordCol" maxWidth="249.599853515625" minWidth="90.13339233398438" prefWidth="113.60003662109375" text="Password" />
                     <TableColumn fx:id="sexeCol" maxWidth="248.2666015625" minWidth="35.46661376953125" prefWidth="52.0" text="Sexe" />
                     <TableColumn fx:id="roleCol" maxWidth="350.93316650390625" minWidth="38.4000244140625" prefWidth="80.7999267578125" text="Rôle" />
-                    <TableColumn fx:id="editCol" maxWidth="529.3333740234375" minWidth="38.4000244140625" prefWidth="56.800048828125" />
+                    <TableColumn fx:id="editCol" maxWidth="529.3333740234375" minWidth="38.4000244140625" prefWidth="63.19992675781248" />
                 </columns>
             </TableView>
         </AnchorPane>
