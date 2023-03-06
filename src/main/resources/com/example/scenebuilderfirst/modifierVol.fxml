@@ -94,7 +94,7 @@
                   <DatePicker fx:id="picker" layoutX="102.0" layoutY="160.0" prefHeight="26.0" prefWidth="156.0" />
                   <RadioButton fx:id="checkboxAvec" layoutX="13.0" layoutY="292.0" mnemonicParsing="false" onAction="#onCheckboxAvecClicked" text="Avec Escale" />
                   <RadioButton fx:id="checkboxSans" layoutX="13.0" layoutY="322.0" mnemonicParsing="false" onAction="#onCheckboxSansClicked" text="Sans Escale" />
-                  <Button fx:id="buttonNext" layoutX="146.0" layoutY="294.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="111.0" text="Ajoutr Esc" />
+                  <Button fx:id="buttonNext" layoutX="146.0" layoutY="294.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="111.0" text="Modifier Escale" />
                   <Label fx:id="labelMessage" layoutX="202.0" layoutY="301.0" />
                </children>
             </AnchorPane>

@@ -144,11 +144,12 @@ ServiceVol sv = new ServiceVol();
 
     }
 
+    /*DatePicker dtp = new DatePicker();
+    LocalDate date = dtp.getValue();
+    LocalDate dateActuelle = LocalDate.now();*/
     private boolean dou= true;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
 
 
         ToggleGroup toggleGroup = new ToggleGroup();
@@ -167,11 +168,9 @@ ServiceVol sv = new ServiceVol();
         buttonNext.setVisible(false);
 
 
-
-
-        buttonNext.setOnAction(ev->{
+        buttonNext.setOnAction(ev -> {
             boolean allFieldsFilled = true;
-            if(num_vol.getText().isEmpty() || aero_arr.getText().isEmpty() || aero_dep.getText().isEmpty()
+            if (num_vol.getText().isEmpty() || aero_arr.getText().isEmpty() || aero_dep.getText().isEmpty()
                     || j_vol.getText() == null || h_arr.getText().isEmpty() || h_dep.getText().isEmpty()) {
                 allFieldsFilled = false;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -180,7 +179,7 @@ ServiceVol sv = new ServiceVol();
                 alert.showAndWait();
             }
 
-            if(allFieldsFilled) {
+            if (allFieldsFilled) {
                 try {
                     AjoutEscScene();
                 } catch (IOException e) {
@@ -188,14 +187,15 @@ ServiceVol sv = new ServiceVol();
                 }
 
 
-            };
+            }
+            ;
         });
 
         //suppression.setOnAction(ev->{
-            //System.out.println(myEscale.toString());
+        //System.out.println(myEscale.toString());
         //});
 
-        suppression.setOnAction(ev->{
+        suppression.setOnAction(ev -> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = null;
             try {
@@ -207,7 +207,6 @@ ServiceVol sv = new ServiceVol();
             }
             suppression.getScene().setRoot(root);
         });
-
 
 
         nul.setOnAction(event -> {
@@ -222,117 +221,116 @@ ServiceVol sv = new ServiceVol();
             }
             nul.getScene().setRoot(root);
         });
-        //LocalDate date = dt.getValue();
 
 
 
         valide.setOnAction(validation -> {
-                    if (num_vol.getText().isEmpty() || aero_arr.getText().isEmpty() || aero_dep.getText().isEmpty()||h_dep.getText().isEmpty()||h_arr.getText().isEmpty()) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Champs obligatoires");
-                        alert.setHeaderText("Veuillez remplir tous les champs obligatoires.");
-                        alert.showAndWait();
-                        dou=false;
-                    }
+            if (num_vol.getText().isEmpty() || aero_arr.getText().isEmpty() || aero_dep.getText().isEmpty() || h_dep.getText().isEmpty() || h_arr.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Champs obligatoires");
+                alert.setHeaderText("Veuillez remplir tous les champs obligatoires.");
+                alert.showAndWait();
+                dou = false;
+            }
 
-                    if(!(h_dep.getText().isEmpty()&& h_arr.getText().isEmpty())){
-                    LocalTime heureDep = LocalTime.parse(h_dep.getText());
-                    LocalTime heureArr = LocalTime.parse(h_arr.getText());
-                    if (heureDep.isAfter(heureArr)) {
-                        Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Heures invalides");
-                        alert.setHeaderText("L'heure de départ doit être antérieure à l'heure d'arrivée.");
-                        alert.showAndWait();
-                        dou=false;
+            if (!(h_dep.getText().isEmpty() && h_arr.getText().isEmpty())) {
+                LocalTime heureDep = LocalTime.parse(h_dep.getText());
+                LocalTime heureArr = LocalTime.parse(h_arr.getText());
+                if (heureDep.isAfter(heureArr)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Heures invalides");
+                    alert.setHeaderText("L'heure de départ doit être antérieure à l'heure d'arrivée.");
+                    alert.showAndWait();
+                    dou = false;
 
-                    }
-                     LocalTime hDep;
+                }
+                   /*  LocalTime hDep;
                         heureDep = LocalTime.parse(h_dep.getText());
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Champs obligatoires");
                         alert.setHeaderText("Heure de départ invalide");
-                        alert.showAndWait();
+                        alert.showAndWait();*/
 
 
-                    // Vérifier l'heure d'arrivée
-                    LocalTime hArr;
+                // Vérifier l'heure d'arrivée
+                    /*LocalTime hArr;
 
                         heureArr = LocalTime.parse(h_arr.getText());
                         Alert aler = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Champs obligatoires");
                         alert.setHeaderText("Heure d'arrivée invalide");
-                        alert.showAndWait();
+                        alert.showAndWait();*/
 
 
 
-                    if (heureDep.isAfter(heureArr)) {
+                   /* if (heureDep.isAfter(heureArr)) {
                         Alert al = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Heures invalides");
                         alert.setHeaderText("L'heure de départ doit être antérieure à l'heure d'arrivée.");
                         alert.showAndWait();
                         dou=false;
-                    }}
+                    }}*/
 
 
-                    //Escale w = se.FindById(parseInt(id_esc.getText()));
-                    Vol v = new Vol();
-                    v.setNum_vol(parseInt(num_vol.getText()));
-                    v.setAero_arrivee(aero_arr.getText());
-                    v.setAero_depart(aero_dep.getText());
-                    //v.setJour_vol(j_vol.getText());
+                //Escale w = se.FindById(parseInt(id_esc.getText()));
+                Vol v = new Vol();
+                v.setNum_vol(parseInt(num_vol.getText()));
+                v.setAero_arrivee(aero_arr.getText());
+                v.setAero_depart(aero_dep.getText());
+                //v.setJour_vol(j_vol.getText());
 
-                    final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                final DateTimeFormatter NEW_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                    String getDateVol = v.setJour_vol(dt.getValue().format(NEW_FORMATTER).toString());
+                String getDateVol = v.setJour_vol(dt.getValue().format(NEW_FORMATTER).toString());
 
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+               /* if (date.isEqual(dateActuelle)&&(date.isBefore(dateActuelle))){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Heures invalides");
+                    alert.setHeaderText("La date sélectionnée est antérieure à la date actuelle.");
+                    alert.showAndWait();
 
+                }*/
 
-                    v.setHeure_arrivee(h_arr.getText());
-                    v.setHeure_depart(h_dep.getText());
-                    v.setId_avion(3);
-                    // v.setEscale(w);
-                    if (myEscale != null) {
-                        v.setEscale(myEscale);
+                v.setHeure_arrivee(h_arr.getText());
+                v.setHeure_depart(h_dep.getText());
+                v.setId_avion(3);
+                // v.setEscale(w);
+                if (myEscale != null) {
+                    v.setEscale(myEscale);
 
-                    } else {
-                        v.setEscale(null);
+                } else {
+                    v.setEscale(null);
+                }
+
+                try {
+                    if (dou) {
+                        sv.createOne(v);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Succès");
+                        alert.setHeaderText("Les données ont été validées avec succès !");
+                        alert.showAndWait();
+
                     }
 
-                    try {
-                        if (dou) {
-                            sv.createOne(v);
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Succès");
-                            alert.setHeaderText("Les données ont été validées avec succès !");
-                            alert.showAndWait();
-
-                        }
-
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 
 
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("listesVol.fxml"));
+                Parent root = null;
+                try {
+                    root = loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                valide.getScene().setRoot(root);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("listesVol.fxml"));
-            Parent root = null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
+
             }
-            valide.getScene().setRoot(root);
-
-
         });
-
-
-
-
-
-
-        }}
+    }}
 
 
 

@@ -114,7 +114,7 @@ ServiceVol sv = new ServiceVol();
 
     }
     public void AjoutEscScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ajouterescale.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("listesc.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 569, 400);
         Stage stage = new Stage();
         stage.setTitle("Ajouter Escale ");
