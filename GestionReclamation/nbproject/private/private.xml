@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/addReponse.fxml</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/affReponse.fxml</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/reef.fxml</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/addReclamation.fxml</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/services/BadWordFilter.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/affReclamation.fxml</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/ReefController.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/AddReponseController.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/services/ServiceReponse.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/services/ServiceReclamation.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/AddReclamationController.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/AffReponseController.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/AffReclamationController.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/test/NewMain.java</file>
+            <file>file:/C:/Users/ingri/Documents/NetBeansProjects/GestionReclamation/src/gui/RefController.java</file>
+        </group>
+    </open-files>
+</project-private>
