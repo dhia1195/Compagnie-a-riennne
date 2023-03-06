@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="805.0" prefWidth="1182.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.jdbc.gui.Ajouter2">
+<AnchorPane prefHeight="805.0" prefWidth="1182.0" style="-fx-background-color: #bdcaf8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.jdbc.gui.Ajouter2">
    <children>
       <Button fx:id="bu_ajouter" layoutX="206.0" layoutY="339.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
       <Button fx:id="bu_modif" layoutX="861.0" layoutY="378.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
@@ -43,6 +43,9 @@
       <PieChart fx:id="pieChart" layoutX="704.0" layoutY="477.0" prefHeight="346.0" prefWidth="464.0" />
       <TextField fx:id="rechercher" layoutX="597.0" layoutY="378.0" onAction="#rechercher" />
       <Label layoutX="516.0" layoutY="385.0" text="Rechercher:" />
+      <TextField fx:id="maail" layoutX="83.0" layoutY="525.0" promptText="Email......." />
+      <Button fx:id="d" layoutX="265.0" layoutY="547.0" mnemonicParsing="false" onAction="#Mail" text="Envoyer" />
+      <Label layoutX="29.0" layoutY="529.0" text="Email:" />
 
    </children>
 </AnchorPane>

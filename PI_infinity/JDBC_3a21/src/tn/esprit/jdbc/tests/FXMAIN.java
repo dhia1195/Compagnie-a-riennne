@@ -28,7 +28,7 @@ public class FXMAIN extends Application {
 
        //URL url = new File("C:\\Users\\dhia-\\Downloads\\PI_infinity\\JDBC_3a21\\src\\tn\\esprit\\jdbc\\gui\\Ajouter2.fxml").toURI().toURL();
         //URL url = new File("C:\\Users\\dhia-\\Downloads\\PI_infinity\\JDBC_3a21\\src\\tn\\esprit\\jdbc\\gui\\AjouterS.fxml").toURI().toURL();
-        URL url = new File("C:\\Users\\dhia-\\Downloads\\PI_infinity\\JDBC_3a21\\src\\tn\\esprit\\jdbc\\gui\\mailingtest.fxml").toURI().toURL();
+        URL url = new File("C:\\Users\\dhia-\\Downloads\\PI_infinity\\JDBC_3a21\\src\\tn\\esprit\\jdbc\\gui\\MenuPrincipale.fxml").toURI().toURL();
 
         System.out.println(url);
 
