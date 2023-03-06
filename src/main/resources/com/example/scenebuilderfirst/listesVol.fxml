@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.scenebuilderfirst.ListeVolController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.scenebuilderfirst.ListeVolController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0E0E6;" BorderPane.alignment="CENTER">
          <children>
@@ -17,21 +17,29 @@
                   <Font name="Berlin Sans FB" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="aj" layoutX="63.0" layoutY="158.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Ajouter" />
-            <Button fx:id="mo" layoutX="63.0" layoutY="214.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Modifier" />
-            <Button fx:id="supp" layoutX="64.0" layoutY="267.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="66.0" text="Accueil" />
+            <Button fx:id="aj" layoutX="63.0" layoutY="153.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Ajouter">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font></Button>
+            <Button fx:id="supp" layoutX="62.0" layoutY="199.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="82.0" text="Accueil">
+               <font>
+                  <Font name="Berlin Sans FB" size="14.0" />
+               </font></Button>
+            <Button fx:id="mo" layoutX="63.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" text="Liste Escales" />
+            
          </children>
       </AnchorPane>
    </left>
    <center>
-      <TableView fx:id="volTable" prefHeight="394.0" prefWidth="437.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="volTable" prefHeight="274.0" prefWidth="394.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="cnum" prefWidth="56.00007629394531" text="Num de vol" />
-          <TableColumn fx:id="chd" prefWidth="91.199951171875" text="Heure Depart" />
-            <TableColumn fx:id="cha" prefWidth="164.0" text="Heure Arrivée" />
-            <TableColumn fx:id="cid" prefWidth="75.20001220703125" text="Id Avion" />
-            <TableColumn fx:id="actionsColumn" prefWidth="136.800048828125" />
+          <TableColumn fx:id="cnum" prefWidth="99.20001220703125" text="Num de vol" />
+          <TableColumn fx:id="chd" prefWidth="133.5999755859375" text="Heure Depart" />
+            <TableColumn fx:id="cha" prefWidth="120.80001831054688" text="Heure Arrivée" />
+            <TableColumn fx:id="cid" prefWidth="149.60003662109375" text="Jour du vol" />
+            <TableColumn fx:id="actionsColumn" prefWidth="25.5999755859375" />
         </columns>
       </TableView>
    </center>
+
 </BorderPane>

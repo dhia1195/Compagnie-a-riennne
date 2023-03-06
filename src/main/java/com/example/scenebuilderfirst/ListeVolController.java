@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -25,11 +26,13 @@ public class ListeVolController implements Initializable {
 
 
 
+
         @FXML
         private TableColumn<Vol, String> cha;
 
         @FXML
         private TableColumn<Vol, String> chd;
+
 
         @FXML
         private TableColumn<Vol, Integer> cid;
@@ -65,8 +68,10 @@ public class ListeVolController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
+
+
             aj.setOnAction(event -> {
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("ajoutervol.fxml"));
                 Parent root= null;
                 try {
                     root = loader.load();
@@ -77,8 +82,9 @@ public class ListeVolController implements Initializable {
                 }
                 aj.getScene().setRoot(root);
             });
-            mo.setOnAction(event -> {
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("hello-view.fxml"));
+
+            mo.setOnAction(eve->{
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("listesc.fxml"));
                 Parent root= null;
                 try {
                     root = loader.load();
@@ -160,12 +166,13 @@ public class ListeVolController implements Initializable {
 
 
 
+
     public void load() throws SQLException {
             List<Vol> vol = sev.selectAll();
             ObservableList<Vol> vlist= FXCollections.observableArrayList(vol);
             cha.setCellValueFactory(new PropertyValueFactory<>("heure_arrivee"));
             chd.setCellValueFactory(new PropertyValueFactory<>("heure_depart"));
-            cid.setCellValueFactory(new PropertyValueFactory<>("id_avion"));
+            cid.setCellValueFactory(new PropertyValueFactory<>("jour_vol"));
             cnum.setCellValueFactory(new PropertyValueFactory<>("num_vol"));
             volTable.setItems(vlist);
 

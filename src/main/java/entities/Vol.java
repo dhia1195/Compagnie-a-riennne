@@ -35,6 +35,16 @@ public class Vol {
         this.escale = escale;
     }
 
+    public Vol(int num_vol, String aero_depart, String aero_arrivee, String jour_vol, String heure_depart, String heure_arrivee, int id_avion) {
+        this.num_vol = num_vol;
+        this.aero_depart = aero_depart;
+        this.aero_arrivee = aero_arrivee;
+        this.jour_vol = jour_vol;
+        this.heure_depart = heure_depart;
+        this.heure_arrivee = heure_arrivee;
+        this.id_avion = id_avion;
+
+    }
     public int getId_vol() {
         return id_vol;
     }

@@ -30,7 +30,14 @@ public class ServiceVol implements IService<Vol> {
         st.setString(5, vol.getHeure_depart());
         st.setString(6, vol.getHeure_arrivee());
         st.setInt(7, vol.getId_avion());
-        st.setInt(8, vol.getEscale().getId_escale());
+
+        if(vol.getEscale()!=null){
+            st.setInt(8, vol.getEscale().getId_escale());
+        }else {
+            st.setObject(8, null);
+        }
+
+
         st.executeUpdate();
         System.out.println("trajet ajouté !");
     }
@@ -255,6 +262,37 @@ public class ServiceVol implements IService<Vol> {
             return temp;
         }
 
+    public int[] countVolsWithEscale() throws SQLException {
+        String reqWithoutEscale = "SELECT COUNT(*) FROM vol WHERE id_escale IS NULL";
+        PreparedStatement psWithoutEscale = cnx.prepareStatement(reqWithoutEscale);
+        ResultSet rsWithoutEscale = psWithoutEscale.executeQuery();
+        rsWithoutEscale.next();
+        int countWithoutEscale = rsWithoutEscale.getInt(1);
+
+        String reqWithEscale = "SELECT COUNT(*) FROM vol WHERE id_escale IS NOT NULL";
+        PreparedStatement psWithEscale = cnx.prepareStatement(reqWithEscale);
+        ResultSet rsWithEscale = psWithEscale.executeQuery();
+        rsWithEscale.next();
+        int countWithEscale = rsWithEscale.getInt(1);
+
+        return new int[] { countWithoutEscale, countWithEscale };
     }
+
+    public List<Object[]> CountVolByAeroArr() throws SQLException {
+        List<Object[]> CountVolByAeroArr = new ArrayList<>();
+        String req = "SELECT aero_arrivee, COUNT(*) as vol_count FROM vol GROUP BY aero_arrivee";
+        Statement st = cnx.createStatement();
+        ResultSet rs = st.executeQuery(req);
+        while (rs.next()) {
+            Object[] row = new Object[2];
+            row[0] = rs.getString("aero_arrivee");
+            row[1] = rs.getInt("vol_count");
+            CountVolByAeroArr.add(row);
+        }
+        return CountVolByAeroArr;
+    }
+
+
+}
 
 

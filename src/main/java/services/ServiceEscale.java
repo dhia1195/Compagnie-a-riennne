@@ -101,5 +101,25 @@ public class ServiceEscale implements IService<Escale> {
         return e;
     }
 
+    public Escale rechercheId(Escale escale) throws SQLException{
+        String req="SELECT * FROM `escale` WHERE `aero_escale`=? and `heure_depart`=? and `heure_arrivee`=? and `jour_escale`=?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1,escale.getAero_escale());
+        ps.setString(2,escale.getHeure_depart());
+        ps.setString(3,escale.getHeure_arrivee());
+        ps.setString(4,escale.getJour_escale());
+        ResultSet rs = ps.executeQuery();
+
+        Escale e = new Escale();
+        while (rs.next()) {
+
+            e.setId_escale(rs.getInt("id_escale"));
+            e.setAero_escale(rs.getString("aero_escale"));
+            e.setHeure_depart(rs.getString("heure_depart"));
+            e.setHeure_arrivee(rs.getString("heure_arrivee"));
+            e.setJour_escale(rs.getString("jour_escale"));
+        }return e;
+    }
+
 
 }

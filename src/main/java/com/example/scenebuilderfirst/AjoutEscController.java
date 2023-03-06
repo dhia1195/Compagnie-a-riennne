@@ -64,6 +64,7 @@ public class AjoutEscController implements Initializable {
         });
         val.setOnAction(valid->{
             try {
+                Escale esc = new Escale();
                 Escale es = new Escale();
                 es.setAero_escale(aero_esc.getText());
                 es.setHeure_depart(h_dep.getText());
@@ -79,19 +80,19 @@ public class AjoutEscController implements Initializable {
                 alert.setTitle("Succès");
                 alert.setHeaderText("Les données ont été validées avec succès !");
                 alert.showAndWait();
+                esc=se.rechercheId(es);
+                AjoutVolController avc = new AjoutVolController();
+                avc.setEscale(esc);
+
+
+
+
 
             }catch (SQLException e) {
                 throw new RuntimeException(e);
             }
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("ajoutervol.fxml"));
-            Parent root= null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            val.getScene().setRoot(root);
+            val.getScene().getWindow().hide();
 
 
 

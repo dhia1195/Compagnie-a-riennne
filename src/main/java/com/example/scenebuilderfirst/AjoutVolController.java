@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import services.ServiceEscale;
 import services.ServiceVol;
@@ -17,7 +19,11 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javafx.stage.Stage;
 import static java.lang.Integer.parseInt;
 
@@ -66,6 +72,7 @@ public class AjoutVolController implements Initializable {
     private Label labelajesc;
 
 
+
     @FXML
     private Button valide;
     @FXML
@@ -81,6 +88,7 @@ public class AjoutVolController implements Initializable {
 
 
     }
+
 
     @FXML
     void onCheckboxAvecClicked(ActionEvent event) {
@@ -112,8 +120,22 @@ public class AjoutVolController implements Initializable {
     ServiceEscale se = new ServiceEscale();
 
 ServiceVol sv = new ServiceVol();
+
+    public void AjoutEscScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ajouterescale.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 569, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Ajouter Escale ");
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+
+
         ToggleGroup toggleGroup = new ToggleGroup();
         toggleGroup.getToggles().addAll(checkboxAvec, checkboxSans);
 
@@ -144,7 +166,22 @@ ServiceVol sv = new ServiceVol();
             }
 
             if(allFieldsFilled) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajouterescale.fxml"));
+                try {
+                    AjoutEscScene();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+
+            };
+        });
+
+        //suppression.setOnAction(ev->{
+            //System.out.println(myEscale.toString());
+        //});
+
+        suppression.setOnAction(ev->{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = null;
             try {
                 root = loader.load();
@@ -153,11 +190,8 @@ ServiceVol sv = new ServiceVol();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            buttonNext.getScene().setRoot(root);
-        };
+            suppression.getScene().setRoot(root);
         });
-
-
 
 
 
@@ -197,8 +231,14 @@ ServiceVol sv = new ServiceVol();
 
                 v.setHeure_arrivee(h_arr.getText());
                 v.setHeure_depart(h_dep.getText());
-                //v.setId_avion(parseInt(id_av.getText()));
+                v.setId_avion(3);
                // v.setEscale(w);
+                if (myEscale!= null) {
+                    v.setEscale(myEscale);
+
+                }else
+                {v.setEscale(null);}
+
                 sv.createOne(v);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Succès");
@@ -221,10 +261,62 @@ ServiceVol sv = new ServiceVol();
         }
 
 
+
+
+
     });
 
 
-    }}
+    }
+
+
+
+    private static Escale myEscale;
+    public void setEscale(Escale esc) {
+        myEscale=esc;
+
+
+    }
+
+
+
+
+        /*public static boolean controleSaisieHeure(String heure) {
+            // Définir le pattern pour l'heure au format 19h20
+            String pattern = "^\\d{0,60}h\\d{0,60}$";
+
+            // Créer le Pattern et le Matcher
+            Pattern p = Pattern.compile(pattern);
+            Matcher m = p.matcher(heure);
+
+            // Vérifier si l'heure correspond au pattern
+            if (!m.matches()) {
+                return false;
+            }
+
+            // Extraire les heures et minutes
+            String[] heureMin = heure.split("h");
+            int heures = Integer.parseInt(heureMin[0]);
+            int minutes = Integer.parseInt(heureMin[1]);
+
+            // Vérifier que l'heure est valide
+            if (heures < 0 || heures > 23) {
+                return false;
+            }
+
+            // Vérifier que les minutes sont valides
+            if (minutes < 0 || minutes > 59) {
+                return false;
+            }
+
+            return true;
+        }*/
+    }
+
+
+
+
+
 
 
 

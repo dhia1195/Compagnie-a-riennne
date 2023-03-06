@@ -24,6 +24,8 @@ public class HelloController implements Initializable {
     @FXML
     private Button suppression;
     @FXML
+    private Button consulte;
+    @FXML
     void modify(ActionEvent event) {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("listesVol.fxml"));
         Parent root= null;
@@ -55,6 +57,19 @@ public class HelloController implements Initializable {
             ajout.getScene().setRoot(root);
         });
 
+        consulte.setOnAction(ev->{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("dashboard.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            consulte.getScene().setRoot(root);
+
+        });
         suppression.setOnAction(event -> {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("listesVol.fxml"));
             Parent root= null;
