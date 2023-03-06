@@ -6,6 +6,7 @@
 package gui;
 
 import entities.MoyenTransport;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import services.MoyenTransportService;
 import static utils.CommonController.setSceneContent;
 
@@ -41,12 +43,14 @@ public class FXMLAjouterMoyenTransportController implements Initializable {
     @FXML
     private TextField txtphoto;
     @FXML
-      private MoyenTransportService MoyenTransportService = new MoyenTransportService();
-    @FXML
    private ChoiceBox choix_type;
-       private String[] type = {"voiture", "utilitaires", "Selection"};
+       private String[] type = {"voiture", "utilitaires", "Monospace"};
     @FXML
     private Button btnBack;
+    @FXML
+    private Button img;
+    @FXML
+    private TextField text_image;
 
     /**
      * Initializes the controller class.
@@ -62,6 +66,9 @@ public class FXMLAjouterMoyenTransportController implements Initializable {
     private void AjouterV(ActionEvent event) {
             String type = choix_type.getValue().toString();
         String modele = txtmodele.getText();
+        
+        String nomimage = text_image.getText();
+
         String photo = txtphoto.getText();
         float frais_chauffeur =Float.parseFloat( txtfrais.getText());
         float prix_location_jour = Float.parseFloat(txtprix.getText());
@@ -70,8 +77,9 @@ public class FXMLAjouterMoyenTransportController implements Initializable {
         
 
         MoyenTransportService sp = new MoyenTransportService();
-        MoyenTransport a = new MoyenTransport( photo,  modele,  prix_location_jour,  frais_chauffeur,  description,  type);
+        MoyenTransport a = new MoyenTransport( nomimage,  modele,  prix_location_jour,  frais_chauffeur,  description,  type);
         sp.ajouter(a);
+        
 try {
             setSceneContent("FXMLGererM");
         } catch (IOException ex) {
@@ -86,5 +94,21 @@ try {
             Logger.getLogger(FXMLAjouterMoyenTransportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void addimg(ActionEvent event) {
+         FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Choisir une image");
+    fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif"),
+        new FileChooser.ExtensionFilter("Tous les fichiers", ".")
+    );
+    File selectedFile = fileChooser.showOpenDialog(null);
+    if (selectedFile != null) {
+        String imagePath = selectedFile.getName();
+        text_image.setText(imagePath);
+    } 
+    }
+
     
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -13,37 +14,43 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="-17.0" layoutY="-18.0" prefHeight="851.0" prefWidth="898.0" style="-fx-background-color: #B0E0E6;">
          <children>
-            <Pane layoutX="39.0" layoutY="130.0" prefHeight="293.0" prefWidth="820.0" style="-fx-background-color: #00aef0; -fx-background-radius: 20px;">
+            <Pane layoutX="26.0" layoutY="130.0" prefHeight="535.0" prefWidth="868.0" style="-fx-background-color: #00aef0; -fx-background-radius: 20px;">
                <children>
                   <Text layoutX="162.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-                  <Label layoutX="6.0" layoutY="3.0" text="Reserver:" textFill="#322f2f" textOverrun="CENTER_ELLIPSIS">
+                  <Label layoutX="6.0" layoutY="3.0" text="Reservez:" textFill="#071d72" textOverrun="CENTER_ELLIPSIS">
                      <font>
                         <Font name="Microsoft Sans Serif" size="48.0" />
                      </font>
                   </Label>
-                  <Label layoutX="6.0" layoutY="108.0" text="Modele" textFill="#0d0d0d">
+                  <Label layoutX="14.0" layoutY="70.0" text="Modele" textFill="#0d0d0d">
                      <font>
                         <Font name="Microsoft Sans Serif" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="tf_modele" layoutX="6.0" layoutY="135.0" prefHeight="49.0" prefWidth="306.0" />
-                  <Label layoutX="357.0" layoutY="108.0" text="Date de départ" textFill="#1e1d1d">
+                  <TextField fx:id="tf_modele" layoutX="7.0" layoutY="94.0" prefHeight="49.0" prefWidth="228.0" />
+                  <Label layoutX="14.0" layoutY="163.0" text="Date de départ" textFill="#1e1d1d">
                      <font>
                         <Font name="Microsoft Sans Serif" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="599.0" layoutY="108.0" text="Date de retour" textFill="#141313">
+                  <Label layoutX="16.0" layoutY="258.0" text="Date de retour" textFill="#141313">
                      <font>
                         <Font name="Microsoft Sans Serif" size="16.0" />
                      </font>
+                     
                   </Label>
-                  <Button layoutX="322.0" layoutY="227.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="46.0" prefWidth="163.0" style="-fx-background-color: white;" text="Rechercher" textFill="#433e3e">
+                  <Button layoutX="548.0" layoutY="454.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="46.0" prefWidth="219.0" style="-fx-background-color: white;" text="Rechercher" textFill="#141414">
                      <font>
                         <Font name="SansSerif Regular" size="24.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="tf_dated" layoutX="356.0" layoutY="135.0" prefHeight="49.0" prefWidth="207.0" />
-                  <DatePicker fx:id="tf_retourd" layoutX="599.0" layoutY="135.0" prefHeight="49.0" prefWidth="207.0" />
+                  <DatePicker fx:id="tf_dated" layoutX="7.0" layoutY="190.0" prefHeight="49.0" prefWidth="228.0" />
+                  <DatePicker fx:id="tf_retourd" layoutX="7.0" layoutY="285.0" prefHeight="49.0" prefWidth="228.0" />
+                  <CheckBox fx:id="checkbox" layoutX="7.0" layoutY="373.0" mnemonicParsing="false" onAction="#onCheckBoxChanged" prefHeight="39.0" prefWidth="228.0" text="Avec chauffeur">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </CheckBox>
                </children>
             </Pane>
             <Label layoutX="16.0" layoutY="25.0" textFill="WHITE">

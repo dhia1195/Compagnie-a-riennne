@@ -5,10 +5,26 @@
  */
 package gui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import entities.MoyenTransport;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -68,6 +84,10 @@ public class FXMLGererMController extends CommonController implements Initializa
     private TableColumn<?, ?> colonnefrais;
     @FXML
     private TableColumn<?, ?> colonnephoto;
+    @FXML
+    private Button btnAdf;
+    @FXML
+    private Button btnSMS;
 
     /**
      * Initializes the controller class.
@@ -160,9 +180,9 @@ public class FXMLGererMController extends CommonController implements Initializa
 
         if (selectedMoyenTransport == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No user selected");
+            alert.setTitle("No car selected");
             alert.setHeaderText(null);
-            alert.setContentText("Please select a user in the table.");
+            alert.setContentText("Please select a car in the table.");
             alert.showAndWait();
             return;
         }
@@ -170,7 +190,7 @@ public class FXMLGererMController extends CommonController implements Initializa
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirm deletion");
         alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete the selected user?");
+        alert.setContentText("Are you sure you want to delete the selected car?");
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -214,5 +234,102 @@ public class FXMLGererMController extends CommonController implements Initializa
     @FXML
     private void handleMouseAction(MouseEvent event) {
         MoyenTransport v = TableMoyenTransport.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void pdf(ActionEvent event) throws DocumentException, FileNotFoundException, IOException   {
+        
+        
+    long millis = System.currentTimeMillis();
+    java.sql.Date DateRapport = new java.sql.Date(millis);
+
+    String DateLyoum = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ENGLISH).format(DateRapport);
+    System.out.println("Date d'aujourdhui : " + DateLyoum);
+
+    com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+
+    try {
+        PdfWriter.getInstance(document, new FileOutputStream(String.valueOf(DateLyoum + ".pdf")));
+        document.open();
+// Ajouter le logo
+       /* Image logo = Image.getInstance("C://xampp//htdocs//onlywork/logo.png");
+        logo.scaleAbsolute(100, 100);
+        logo.setAlignment(Element.ALIGN_CENTER);
+        document.add(logo);*/
+        // Ajouter un titre avec un style personnalisé
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK);
+        Paragraph title = new Paragraph("Rapport détaillé de notre application", titleFont);
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title);
+
+        // Ajouter un paragraphe avec un style personnalisé
+        Font paragraphFont = FontFactory.getFont(FontFactory.TIMES, 12, BaseColor.BLACK);
+        Paragraph ph1 = new Paragraph("Voici un rapport détaillé de notre application qui contient tous les événements. Pour chaque événement, nous fournissons des informations telles que la date d'aujourd'hui : " + DateRapport, paragraphFont);
+        ph1.setSpacingAfter(10);
+        document.add(ph1);
+
+        PdfPTable table = new PdfPTable(5);
+        table.setWidthPercentage(100);
+
+        // Créer une cellule avec un style personnalisé
+        Font cellFont = FontFactory.getFont(FontFactory.TIMES, 12, BaseColor.WHITE);
+        PdfPCell cell = new PdfPCell(new Phrase("Model", cellFont));
+        cell.setBackgroundColor(BaseColor.BLACK);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("type", cellFont));
+        cell.setBackgroundColor(BaseColor.BLACK);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+
+        cell = new PdfPCell(new Phrase("prix par jour", cellFont));
+        cell.setBackgroundColor(BaseColor.BLACK);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+        
+        cell = new PdfPCell(new Phrase("frais chauffeur", cellFont));
+        cell.setBackgroundColor(BaseColor.BLACK);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+        
+                
+        cell = new PdfPCell(new Phrase("description", cellFont));
+        cell.setBackgroundColor(BaseColor.BLACK);
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        table.addCell(cell);
+            
+        MoyenTransportService r = new MoyenTransportService();
+        r.afficheListe().forEach(e -> {
+            table.addCell(String.valueOf(e.getModele()));
+            table.addCell(String.valueOf(e.getType()));
+            table.addCell(String.valueOf(e.getPrix_location_jour()));
+            table.addCell(String.valueOf(e.getFrais_chauffeur()));
+            table.addCell(String.valueOf(e.getDescription()));
+
+        });
+                
+
+        document.add(table);
+    } catch (Exception e) {
+        System.out.println(e);
+    }
+    document.close();
+
+    // Ouvrir le fichier PDF
+    File file = new File(DateLyoum + ".pdf");
+    Desktop desktop = Desktop.getDesktop();
+    if (file.exists()) {
+        desktop.open(file);
+    }
+    }
+
+    @FXML
+    private void SMS(ActionEvent event) {
+             try {
+            setSceneContent("message");
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLReservationController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

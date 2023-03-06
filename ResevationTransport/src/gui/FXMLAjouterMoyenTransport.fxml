@@ -67,6 +67,8 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
+            <TextField fx:id="text_image" layoutX="618.0" layoutY="215.0" />
+            <Button fx:id="img" layoutX="611.0" layoutY="167.0" mnemonicParsing="false" onAction="#addimg" text="ajouter image" />
          </children>
       </AnchorPane>
    </children>

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -45,6 +47,8 @@ public class FXMLReservationController implements Initializable {
            private ReservationTservice ReservationTservice = new ReservationTservice();
     @FXML
     private TextField tf_modele;
+    @FXML
+    private CheckBox checkbox;
 
     /**
      * Initializes the controller class.
@@ -62,14 +66,25 @@ public class FXMLReservationController implements Initializable {
         
                 ReservationTservice sp=new ReservationTservice();
           String modele =tf_modele.getText();
+          
+          
               Date date_debut = java.sql.Date.valueOf(tf_dated.getValue());
      Date date_fin = java.sql.Date.valueOf(tf_retourd.getValue());
     
      
-Context.getInstance().addContextObject("DateF",date_fin);
-Context.getInstance().addContextObject("DateD",date_debut);
-Context.getInstance().addContextObject("modele",modele);
 
+ if (checkbox.isSelected()) {
+            Context.getInstance().addContextObject("DateF",date_fin);
+            Context.getInstance().addContextObject("DateD",date_debut);
+            Context.getInstance().addContextObject("modele",modele);
+            Context.getInstance().addContextObject("statut_chauffeur",true);
+             }
+ else{
+      Context.getInstance().addContextObject("DateF",date_fin);
+            Context.getInstance().addContextObject("DateD",date_debut);
+            Context.getInstance().addContextObject("modele",modele);
+            Context.getInstance().addContextObject("statut_chauffeur",false);
+ }
 
 
 //   Location a = new Location( date_debut, date_fin,  lieu);
@@ -82,5 +97,10 @@ Context.getInstance().addContextObject("modele",modele);
         }
     
 }
+
+    @FXML
+    private void onCheckBoxChanged(ActionEvent event) {
+     
+    }
 
 }

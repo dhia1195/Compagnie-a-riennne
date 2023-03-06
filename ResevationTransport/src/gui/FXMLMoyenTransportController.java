@@ -92,9 +92,11 @@ public class FXMLMoyenTransportController extends CommonController implements In
         
         // affiche les données dans le tableau
         TableMoyenTransport.getItems().setAll(vleList);*/
+         
         Date datef = (Date) Context.getInstance().getContextObject("DateF");
         Date dateD = (Date) Context.getInstance().getContextObject("DateD");
         String modele = (String) Context.getInstance().getContextObject("modele");
+        boolean statut_chauffeur = (boolean) Context.getInstance().getContextObject("statut_chauffeur");
 
 
         List<MoyenTransport> l = vs.afficherMoyenTransportsDisponibles(modele,  dateD, datef);

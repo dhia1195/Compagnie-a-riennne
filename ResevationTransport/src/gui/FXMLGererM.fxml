@@ -10,17 +10,17 @@
    <children>
       <AnchorPane id="AnchorPane" layoutX="-14.0" layoutY="-4.0" prefHeight="711.0" prefWidth="1125.0" style="-fx-background-color: #B0E0E6;">
          <children>
-            <Button fx:id="btnAjouter" layoutX="166.0" layoutY="593.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #00aef0;" text="Ajouter">
+            <Button fx:id="btnAjouter" layoutX="109.0" layoutY="593.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #00aef0;" text="Ajouter">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnSupprimer" layoutX="434.0" layoutY="593.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #00aef0;" text="Supprimer">
+            <Button fx:id="btnSupprimer" layoutX="319.0" layoutY="593.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #00aef0;" text="Supprimer">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnMettreajour" layoutX="670.0" layoutY="593.0" mnemonicParsing="false" onAction="#Metrreajour" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #00aef0;" text="Modifier">
+            <Button fx:id="btnMettreajour" layoutX="538.0" layoutY="593.0" mnemonicParsing="false" onAction="#Metrreajour" prefHeight="31.0" prefWidth="122.0" style="-fx-background-color: #00aef0;" text="Modifier">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -35,6 +35,16 @@
                   <TableColumn fx:id="colonnephoto" prefWidth="225.0" text="photo" />
                </columns>
             </TableView>
+            <Button fx:id="btnAdf" layoutX="738.0" layoutY="593.0" mnemonicParsing="false" onAction="#pdf" prefHeight="31.0" prefWidth="94.0" style="-fx-background-color: #00aef0;" text="PDF">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnSMS" layoutX="926.0" layoutY="593.0" mnemonicParsing="false" onAction="#SMS" prefHeight="31.0" prefWidth="111.0" style="-fx-background-color: #00aef0;" text="SMS">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
