@@ -55,8 +55,13 @@ public class ServiceVol implements IService<Vol> {
         ps.setString(5, vol.getHeure_depart());
         ps.setString(6, vol.getHeure_arrivee());
         ps.setInt(7, vol.getId_avion());
-        ps.setInt(8, vol.getEscale().getId_escale());
+        if(vol.getEscale()!=null){
+            ps.setInt(8, vol.getEscale().getId_escale());
+        }else {
+            ps.setObject(8, null);
+        }
         ps.setInt(9, vol.getId_vol());
+
         ps.executeUpdate();
         System.out.println("update done");
 

@@ -82,7 +82,10 @@ public class AjoutEscController implements Initializable {
                 alert.showAndWait();
                 esc=se.rechercheId(es);
                 AjoutVolController avc = new AjoutVolController();
+                ModifierVolController ac = new ModifierVolController();
+
                 avc.setEscale(esc);
+                ac.setEscale(esc);
 
 
 

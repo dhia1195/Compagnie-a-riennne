@@ -69,6 +69,19 @@ public class ListEscController implements Initializable {
 
 
 
+        supesc.setOnAction(ev->{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("hello-esc.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            supesc.getScene().setRoot(root);
+        });
+
 
         actionsColumn.setCellFactory(column -> {
             return new TableCell<Escale, Void>() {
