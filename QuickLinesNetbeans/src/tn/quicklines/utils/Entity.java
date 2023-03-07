@@ -20,24 +20,24 @@ import java.util.logging.Logger;
  *
  * @author houce
  */
-public class Entity  {
-    public List<Object> getValues(){
-        List<Object> obj=new ArrayList<>();
+public abstract class Entity  {
+    public abstract List<Object> getValues() throws IllegalArgumentException, IllegalAccessException , UnsupportedOperationException;/*{
+        List<Object> values=new ArrayList<>();
         for (Field declaredField : this.getClass().getDeclaredFields()) {
             try {
-                obj.add(declaredField.get(this));
+                values.add(declaredField.get(this));
             }catch (IllegalArgumentException | IllegalAccessException ex) {
                 Logger.getLogger(Entity.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return obj;
-    }
-    public void setValues(List<Object> args) throws IllegalArgumentException, IllegalAccessException{
-        for (int i=0;i<args.size();i++){
+        return values;
+    }*/
+    public abstract void setValues(List<Object> rowValues) throws IllegalArgumentException, IllegalAccessException ;/*{
+        for (int i=0;i<rowValues.size();i++){
             //if(this.getClass().getDeclaredFields()[i].getClass() )
-            this.getClass().getDeclaredFields()[i].set(this, args.get(i) );
+            this.getClass().getDeclaredFields()[i].set(this, rowValues.get(i) );
         }
-    }
+    }*/
 
     @Override
     public boolean equals(Object obj) {
@@ -51,8 +51,12 @@ public class Entity  {
             return false;
         }
         final Entity other = (Entity) obj;
-        if (this.getValues() != other.getValues()) {
-            return false;
+        try {
+            if (this.getValues() != other.getValues()) {
+                return false;
+            }
+        } catch (IllegalArgumentException | IllegalAccessException | UnsupportedOperationException ex) {
+            Logger.getLogger(Entity.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
