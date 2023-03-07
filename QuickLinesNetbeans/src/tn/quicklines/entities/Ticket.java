@@ -4,11 +4,10 @@ import java.util.Objects;
 
 public class Ticket {
     //private Vol volTicket;
-    private static int compteurTicket=0;
     private int idTicket;
     private String codeTicket;
-    private int volTicket;
-    private int siegeTicket;
+    private int volTicketID;
+    private int siegeTicketID;
     private float prix;
     private int client;
     private String nomPassager;
@@ -25,8 +24,6 @@ public class Ticket {
         this.siegeTicket = siegeTicket;
         this.codeTicket= String.valueOf(volTicket)+String.valueOf(siegeTicket);
         this.prix = prix;
-        this.idTicket=compteurTicket;
-        compteurTicket++;
         
     }
 
