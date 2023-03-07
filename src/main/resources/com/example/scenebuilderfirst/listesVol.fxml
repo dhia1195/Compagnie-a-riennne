@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.scenebuilderfirst.ListeVolController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="854.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.scenebuilderfirst.ListeVolController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B0E0E6;" BorderPane.alignment="CENTER">
          <children>
@@ -37,7 +37,7 @@
           <TableColumn fx:id="chd" prefWidth="133.5999755859375" text="Heure Depart" />
             <TableColumn fx:id="cha" prefWidth="120.80001831054688" text="Heure Arrivée" />
             <TableColumn fx:id="cid" prefWidth="149.60003662109375" text="Jour du vol" />
-            <TableColumn fx:id="actionsColumn" prefWidth="25.5999755859375" />
+            <TableColumn fx:id="actionsColumn" prefWidth="148.00003662109373" />
         </columns>
       </TableView>
    </center>

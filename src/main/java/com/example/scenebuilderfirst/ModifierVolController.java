@@ -98,6 +98,7 @@ public class ModifierVolController implements Initializable {
     Vol vl = new Vol();
 ServiceEscale se = new ServiceEscale();
 ServiceVol sv = new ServiceVol();
+static Vol myVol;
     public void setVol(Vol vol){
         aero_arrmod.setText(vol.getAero_arrivee());
         aero_depmod.setText(vol.getAero_depart());
@@ -109,17 +110,44 @@ ServiceVol sv = new ServiceVol();
         num_volmod.setText(String.valueOf(vol.getNum_vol()));
         h_arrmod.setText(vol.getHeure_arrivee());
         h_depmod.setText(vol.getHeure_depart());
+        myVol=vol;
+
+
+
+    }
+
+    private static Escale myEscale;
+    public void setEscale(Escale esc) {
+        myEscale=esc;
 
 
 
     }
     public void AjoutEscScene() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("listesc.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 569, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Ajouter Escale ");
-        stage.setScene(scene);
-        stage.show();
+        if(myVol.getEscale().getId_escale()==0){
+            System.out.println("aaslema");
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("ajouterescale.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 569, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Ajouter Escale ");
+            stage.setScene(scene);
+            stage.show();
+
+        }else{
+
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("modifesc.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 569, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Modifier Escale ");
+            ModifyEscController mvc= fxmlLoader.getController();
+            mvc.setEscale(myVol.getEscale());
+            stage.setScene(scene);
+            stage.show();
+
+        }
+
     }
 
     @Override
@@ -242,9 +270,4 @@ ServiceVol sv = new ServiceVol();
 
 
 }
-    private static Escale myEscale;
-    public void setEscale(Escale esc) {
-        myEscale=esc;
-
-
-    }}
+   }

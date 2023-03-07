@@ -49,8 +49,8 @@ public class ModifyEscController implements Initializable {
     @FXML
     private DatePicker pickmod;
 
-    static Escale escale = null;
-   Escale es = new Escale();
+    static Escale escale;
+
     ServiceEscale se = new ServiceEscale();
     public void setEscale (Escale esc){
         aero_escomod.setText(esc.getAero_escale());
@@ -153,4 +153,6 @@ public class ModifyEscController implements Initializable {
 
 
     }
+
+
 }
