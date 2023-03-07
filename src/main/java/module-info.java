@@ -4,6 +4,8 @@ module com.example.pi {
     requires java.sql;
     requires javax.mail.api;
     requires org.jfree.jfreechart;
+    requires itextpdf;
+    requires java.desktop;
 
 
     opens tn.esprit.main to javafx.fxml;

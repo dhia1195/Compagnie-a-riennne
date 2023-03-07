@@ -105,7 +105,7 @@ public class ChauffeurController implements Initializable {
             try {
                 boolean v=true;
                 while (v) {
-                    if (!su.findByMail(email.getText()).getEmail().equals(user.getEmail())&&su.findByMail(email.getText()).getId()!=0 ) {
+                    if (su.findByMail(email.getText()).getId()!=0 ) {
                         v = false;
                         email_existe.setText("email existe deja");
                     }

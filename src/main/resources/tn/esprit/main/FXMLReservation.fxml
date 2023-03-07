@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #bdcaf8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.FXMLReservationController">
+   <top>
+      <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #2c3e50;">
+         <HBox alignment="CENTER" prefHeight="128.0" prefWidth="1150.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" prefWidth="200.0" spacing="5.0">
+               <Label style="-fx-text-fill: white;" text="Welcome Client!" />
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" spacing="20.0">
+               <TextField fx:id="search_field" prefWidth="200.0" promptText="Recherche par nom ou email" />
+               <Button fx:id="search_button" maxWidth="100.0" minHeight="36.0" minWidth="119.0" text="Rechercher" />
+            </HBox>
+         </HBox>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="724.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #2c3e50;" styleClass="sidebar">
+         <children>
+            <AnchorPane prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
+               <children>
+                  <Button fx:id="fetch" layoutX="40.0" layoutY="50.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Mon compte" />
+                  <Button fx:id="reclamation" layoutX="40.0" layoutY="100.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Reclamation" />
+                  <Button fx:id="res" layoutX="40.0" layoutY="150.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Reservation Transport" />
+                  <Button fx:id="rvol" layoutX="40.0" layoutY="200.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Rechercher Vol" />
+                  <Button fx:id="logout_button" layoutX="40.0" layoutY="250.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Déconnexion" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <AnchorPane id="AnchorPane" layoutX="-17.0" layoutY="-18.0" prefHeight="606.0" prefWidth="720.0" style="-fx-background-color: #B0E0E6;">
+               <children>
+                  <Pane layoutX="20.0" layoutY="22.0" prefHeight="535.0" prefWidth="558.0" style="-fx-background-color: #00aef0; -fx-background-radius: 20px;">
+                     <children>
+                        <Text layoutX="162.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                        <Label layoutX="6.0" layoutY="3.0" text="Reservez:" textFill="#071d72" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="30.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="9.0" layoutY="68.0" text="Modele" textFill="#0d0d0d">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_modele" layoutX="7.0" layoutY="94.0" prefHeight="49.0" prefWidth="228.0" />
+                        <Label layoutX="14.0" layoutY="163.0" text="Date de départ" textFill="#1e1d1d">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="16.0" layoutY="258.0" text="Date de retour" textFill="#141313">
+                           <font>
+                              <Font name="Microsoft Sans Serif" size="18.0" />
+                           </font>
+
+                        </Label>
+                        <Button layoutX="247.0" layoutY="403.0" mnemonicParsing="false" onAction="#rechercher" prefHeight="46.0" prefWidth="219.0" style="-fx-background-color: white;" text="Rechercher" textFill="#141414">
+                           <font>
+                              <Font name="SansSerif Regular" size="20.0" />
+                           </font>
+                        </Button>
+                        <DatePicker fx:id="tf_dated" layoutX="7.0" layoutY="190.0" prefHeight="49.0" prefWidth="228.0" />
+                        <DatePicker fx:id="tf_retourd" layoutX="7.0" layoutY="285.0" prefHeight="49.0" prefWidth="228.0" />
+                        <CheckBox fx:id="checkbox" layoutX="16.0" layoutY="354.0" mnemonicParsing="false" onAction="#onCheckBoxChanged" prefHeight="39.0" prefWidth="228.0" text="Avec chauffeur">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </CheckBox>
+                     </children>
+                  </Pane>
+                  <Label layoutX="16.0" layoutY="25.0" textFill="WHITE">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

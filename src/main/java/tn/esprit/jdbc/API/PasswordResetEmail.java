@@ -12,7 +12,7 @@ public class PasswordResetEmail {
     private final String host = "smtp.gmail.com"; // Your email SMTP host
     private final int port = 587; // Your email SMTP port
     private final String subject = "Password Reset Request"; // Email subject
-    private final String resetLink = "http://example.com/reset_password?token=abc123"; // Password reset link
+
 
     public void sendPasswordResetEmail(String recipientEmail, User user) throws MessagingException {
         Properties props = new Properties();

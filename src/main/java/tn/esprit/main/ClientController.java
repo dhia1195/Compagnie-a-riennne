@@ -38,11 +38,19 @@ public class ClientController implements Initializable {
     @FXML
     private Button boutton_signup;
     @FXML
+    private Button reclamation;
+    @FXML
     private Label email_existe;
     @FXML
     private Label pass_conf;
+    @FXML
+    private Button res;
+    @FXML
+    private Button fetch;
+    @FXML
+    private Button rvol;
     ServiceUser su =new ServiceUser();
-    static User user =null;
+    static User user;
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -66,12 +74,66 @@ public class ClientController implements Initializable {
             }
             logout_button.getScene().setRoot(root);
         } );
+        reclamation.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("addReclamation.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            AddReclamationController arc=loader.getController();
+            arc.setClient(user);
+            logout_button.getScene().setRoot(root);
+        } );
+        res.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLReservation.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            FXMLReservationController rc=loader.getController();
+            rc.setClient(user);
+            logout_button.getScene().setRoot(root);
+        } );
+        fetch.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("client.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            ClientController cc=loader.getController();
+            try {
+                cc.setClient(user);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        rvol.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("recherche.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            RechercheController rc=loader.getController();
+
+                rc.setClient(user);
+
+            logout_button.getScene().setRoot(root);
+        } );
 
         modifier.setOnAction(edit ->  {
             try {
                 boolean v=true;
                 while (v) {
-                    if (!su.findByMail(email.getText()).getEmail().equals(user.getEmail())&&su.findByMail(email.getText()).getId()!=0 ) {
+                    if (su.findByMail(email.getText()).getId()!=0 ) {
                         v = false;
                         email_existe.setText("email existe deja");
                     }

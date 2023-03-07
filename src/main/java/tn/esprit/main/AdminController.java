@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import tn.esprit.jdbc.entities.MoyenTransport;
 import tn.esprit.jdbc.entities.Role;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.services.ServiceRole;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 public class AdminController implements Initializable {
     @FXML
@@ -40,6 +42,18 @@ public class AdminController implements Initializable {
     private Button fetch;
     @FXML
     private Button chauffeur;
+    @FXML
+    private Button gavion;
+    @FXML
+    private Button gsiege;
+    @FXML
+    private Button reclamation;
+    @FXML
+    private Button dvol;
+    @FXML
+    private Button gvol;
+    @FXML
+    private Button gmoy;
     @FXML
     private TextField search_field;
     ServiceUser su = new ServiceUser();
@@ -68,7 +82,10 @@ public class AdminController implements Initializable {
                 commitEdit(choiceBox.getValue());
                 try {
                     User user = getTableView().getItems().get(getIndex());
-                    su.updateRole(user.getId(),choiceBox.getValue().getId());
+
+                        su.updateRole(user.getId(),choiceBox.getValue().getId());
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -116,17 +133,6 @@ public class AdminController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        chauffeur.setOnAction(ch->{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("adminChauffeurDash.fxml"));
-            Parent root= null;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            chauffeur.getScene().setRoot(root);
-
-        });
         search_field.setOnKeyTyped(recherche -> {
             try {
 
@@ -138,8 +144,80 @@ public class AdminController implements Initializable {
                 e.printStackTrace();
             }
         });
+        chauffeur.setOnAction(ch->{
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("adminChauffeurDash.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            chauffeur.getScene().setRoot(root);
+
+        });
+
         logout_button.setOnAction(logout ->  {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        reclamation.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("addReponse.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        gavion.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("Ajouter2.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        gsiege.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("AjouterS.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        gmoy.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXMLGererM.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        dvol.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("dashboard.fxml"));
+            Parent root= null;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            logout_button.getScene().setRoot(root);
+        } );
+        gvol.setOnAction(logout ->  {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("listesVol.fxml"));
             Parent root= null;
             try {
                 root = loader.load();
@@ -179,8 +257,18 @@ public class AdminController implements Initializable {
                     deleteBtn.setOnMouseClicked((MouseEvent event) -> {
                         try {
                             User user = getTableView().getItems().get(getIndex());
-                            su.deletOne(user.getId());
-                            refreshTable();
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Confirm deletion");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Are you sure you want to delete this user");
+
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK) {
+                                su.deletOne(user.getId());
+                                refreshTable();
+                            }
+
+
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }

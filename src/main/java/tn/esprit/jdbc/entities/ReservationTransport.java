@@ -25,6 +25,14 @@ public class ReservationTransport {
         this.statut_chauffeur = statut_chauffeur;
     }
 
+    public ReservationTransport(int id_moyent, Date date_debut, Date date_fin, String destination, boolean statut_chauffeur) {
+        this.id_moyent = id_moyent;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
+        this.destination = destination;
+        this.statut_chauffeur = statut_chauffeur;
+    }
+
     public int getId_reservationt() {
         return id_reservationt;
     }

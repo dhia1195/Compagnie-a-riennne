@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ChoiceBox?>
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #bdcaf8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.FXMLAjouterMoyenTransportController">
+   <top>
+      <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #2c3e50;">
+         <HBox alignment="CENTER" prefHeight="128.0" prefWidth="1150.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" prefWidth="200.0" spacing="5.0">
+               <Label style="-fx-text-fill: white;" text="Welcome Admin!" />
+            </VBox>
+            <HBox alignment="CENTER_RIGHT" spacing="20.0">
+               <TextField fx:id="search_field" prefWidth="200.0" promptText="Recherche par nom ou email" />
+               <Button fx:id="search_button" maxWidth="100.0" minHeight="36.0" minWidth="119.0" text="Rechercher" />
+            </HBox>
+         </HBox>
+      </AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="724.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #2c3e50;" styleClass="sidebar">
+         <children>
+            <AnchorPane prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
+               <children>
+                  <Button fx:id="fetch" layoutX="40.0" layoutY="50.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Liste des clients" />
+                  <Button fx:id="chauffeur" layoutX="40.0" layoutY="100.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Chauffeurs" />
+                  <Button fx:id="reclamation" layoutX="40.0" layoutY="150.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Reclamation" />
+                  <Button fx:id="gavion" layoutX="40.0" layoutY="200.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Avion" />
+                  <Button fx:id="gsiege" layoutX="40.0" layoutY="250.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Siege" />
+                  <Button fx:id="gmoy" layoutX="40.0" layoutY="300.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Transport" />
+                  <Button fx:id="gvol" layoutX="40.0" layoutY="350.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Vol" />
+                  <Button fx:id="dvol" layoutX="40.0" layoutY="400.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Dashboard Vol" />
+                  <Button fx:id="logout_button" layoutX="40.0" layoutY="450.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Déconnexion" />
+
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" >
+         <children>
+            <AnchorPane id="AnchorPane" layoutY="-10.0" prefHeight="627.0" prefWidth="894.0" style="-fx-background-color: #B0E0E6;">
+               <children>
+                  <Label layoutX="250.0" layoutY="26.0" prefHeight="70.0" prefWidth="363.0" text="Ajouter Voiture" textFill="#071d72">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnAjouter" layoutX="312.0" layoutY="518.0" mnemonicParsing="false" onAction="#AjouterV" prefHeight="69.0" prefWidth="270.0" style="-fx-background-color: #00aef0;" text="Ajouter">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="50.0" layoutY="87.0" textFill="WHITE">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="100.0" layoutY="326.0" text="Description" textFill="#171717">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtdesc" layoutX="103.0" layoutY="378.0" prefHeight="119.0" prefWidth="706.0" />
+                  <Label layoutX="48.0" layoutY="99.0" text="Modele" textFill="#0a0a0a">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtmodele" layoutX="48.0" layoutY="127.0" prefHeight="27.0" prefWidth="202.0" />
+                  <Label layoutX="347.0" layoutY="99.0" text="Frais chauffeur" textFill="#1b1a1a">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtfrais" layoutX="349.0" layoutY="127.0" prefHeight="27.0" prefWidth="196.0" />
+                  <Label layoutX="52.0" layoutY="179.0" text="Prix" textFill="#0a0a0a">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtprix" layoutX="52.0" layoutY="215.0" prefHeight="27.0" prefWidth="196.0" />
+                  <Label layoutX="627.0" layoutY="99.0" text="Photo" textFill="#070707">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtphoto" layoutX="627.0" layoutY="127.0" prefHeight="27.0" prefWidth="196.0" />
+                  <Label layoutX="347.0" layoutY="179.0" text="Type" textFill="#171717">
+                     <font>
+                        <Font name="Microsoft Sans Serif" size="20.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="choix_type" layoutX="346.0" layoutY="215.0" prefHeight="26.0" prefWidth="202.0" />
+                  <Button fx:id="btnBack" layoutX="-1.0" layoutY="10.0" mnemonicParsing="false" onAction="#back" prefHeight="13.0" prefWidth="105.0" style="-fx-background-color: #00aef0;" text="&lt;--Back">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="text_image" layoutX="618.0" layoutY="215.0" />
+                  <Button fx:id="img" layoutX="611.0" layoutY="167.0" mnemonicParsing="false" onAction="#addimg" text="ajouter image" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+
+
+
+
+   </center>
+</BorderPane>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="795.0" prefWidth="1157.0" style="-fx-background-color: #3F2B63;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.MenuPrincipaleController">
+   <children>
+      <Button fx:id="buttonAvion" layoutX="494.0" layoutY="202.0" mnemonicParsing="false"  prefHeight="89.0" prefWidth="170.0" text="Gestion Avion" textFill="#8d3535">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonSiege" layoutX="494.0" layoutY="315.0" mnemonicParsing="false"  prefHeight="89.0" prefWidth="170.0" text="Gestion Siége" textAlignment="CENTER" textFill="#8d3535d4">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Label layoutX="450.0" layoutY="71.0" prefHeight="72.0" prefWidth="258.0" text="  Accueil D'Avion" textFill="#a87b7b">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Button layoutX="494.0" layoutY="423.0" mnemonicParsing="false" prefHeight="89.0" prefWidth="170.0" text="Quitter" textAlignment="CENTER" textFill="#6b3131d4">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

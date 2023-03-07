@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.313376753507014" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.SignupController">
+<SplitPane dividerPositions="0.313376753507014" style="-fx-background-color: #bdcaf8;" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.SignupController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="100.0" />
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="418.0" style="-fx-background-color: #e0e4ff;">

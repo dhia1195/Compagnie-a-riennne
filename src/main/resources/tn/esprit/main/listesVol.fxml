@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="mainPane" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #bdcaf8;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.ListeVolController">
+    <top>
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #2c3e50;">
+            <HBox alignment="CENTER" prefHeight="128.0" prefWidth="1150.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox alignment="CENTER" prefWidth="200.0" spacing="5.0">
+                    <Label style="-fx-text-fill: white;" text="Welcome Admin!" />
+                </VBox>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                    <TextField fx:id="search_field" prefWidth="200.0" promptText="Recherche par nom ou email" />
+                    <Button fx:id="search_button" maxWidth="100.0" minHeight="36.0" minWidth="119.0" text="Rechercher" />
+                </HBox>
+            </HBox>
+        </AnchorPane>
+    </top>
+    <left>
+        <VBox prefHeight="724.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #2c3e50;" styleClass="sidebar">
+            <children>
+                <AnchorPane prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
+                    <children>
+                        <Button fx:id="fetch" layoutX="40.0" layoutY="50.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Liste des clients" />
+                        <Button fx:id="chauffeur" layoutX="40.0" layoutY="100.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Chauffeurs" />
+                        <Button fx:id="reclamation" layoutX="40.0" layoutY="150.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Reclamation" />
+                        <Button fx:id="gavion" layoutX="40.0" layoutY="200.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Avion" />
+                        <Button fx:id="gsiege" layoutX="40.0" layoutY="250.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Siege" />
+                        <Button fx:id="gmoy" layoutX="40.0" layoutY="300.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Transport" />
+                        <Button fx:id="gvol" layoutX="40.0" layoutY="350.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Vol" />
+                        <Button fx:id="dvol" layoutX="40.0" layoutY="400.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Dashboard Vol" />
+                        <Button fx:id="logout_button" layoutX="40.0" layoutY="450.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Déconnexion" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </left>
+    <center>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+              <TableView fx:id="volTable" layoutY="53.0" prefHeight="450.0" prefWidth="700.0">
+                  <columns>
+                      <TableColumn fx:id="cnum" prefWidth="99.20001220703125" text="Num de vol" />
+                      <TableColumn fx:id="chd" prefWidth="133.5999755859375" text="Heure Depart" />
+                      <TableColumn fx:id="cha" prefWidth="120.80001831054688" text="Heure Arrivée" />
+                      <TableColumn fx:id="cid" prefWidth="149.60003662109375" text="Jour du vol" />
+                      <TableColumn fx:id="actionsColumn" prefWidth="148.00003662109373" />
+                  </columns>
+              </TableView>
+            <Button fx:id="ajoutv" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" text="Ajouter Vol" />
+         </children>
+      </AnchorPane>
+
+
+
+    </center>
+</BorderPane>

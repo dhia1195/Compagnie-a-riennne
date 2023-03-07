@@ -13,4 +13,9 @@
       <module name="PI" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="PI" options="--add-exports com.fasterxml.jackson.core/com.twilio=com.example.pi --add-exports com.fasterxml.jackson.core/com.twilio.rest.api.v2010.account=com.example.pi --add-exports com.fasterxml.jackson.core/com.twilio.type=com.example.pi" />
+    </option>
+  </component>
 </project>

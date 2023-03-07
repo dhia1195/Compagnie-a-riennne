@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.DatePicker?>
+<BorderPane fx:id="mainPane" prefHeight="600.0" style="-fx-background-color: #bdcaf8;" prefWidth="900.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.main.ReefController">
+    <top>
+        <AnchorPane prefHeight="70.0" prefWidth="900.0" style="-fx-background-color: #2c3e50;">
+            <HBox alignment="CENTER" prefHeight="128.0" prefWidth="1150.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <VBox alignment="CENTER" prefWidth="200.0" spacing="5.0">
+                    <Label style="-fx-text-fill: white;" text="Welcome Admin!" />
+                </VBox>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                    <TextField fx:id="search_field" prefWidth="200.0" promptText="Recherche par nom ou email" />
+                    <Button fx:id="search_button" maxWidth="100.0" minHeight="36.0" minWidth="119.0" text="Rechercher" />
+                </HBox>
+            </HBox>
+        </AnchorPane>
+    </top>
+    <left>
+        <VBox prefHeight="724.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: #2c3e50;" styleClass="sidebar">
+            <children>
+                <AnchorPane prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #2c3e50;">
+                    <children>
+                        <Button fx:id="fetch" layoutX="40.0" layoutY="50.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Liste des clients" />
+                        <Button fx:id="chauffeur" layoutX="40.0" layoutY="100.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Chauffeurs" />
+                        <Button fx:id="reclamation" layoutX="40.0" layoutY="150.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Reclamation" />
+                        <Button fx:id="gavion" layoutX="40.0" layoutY="200.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Avion" />
+                        <Button fx:id="gsiege" layoutX="40.0" layoutY="250.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Siege" />
+                        <Button fx:id="gmoy" layoutX="40.0" layoutY="300.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Transport" />
+                        <Button fx:id="gvol" layoutX="40.0" layoutY="350.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Gestion Vol" />
+                        <Button fx:id="dvol" layoutX="40.0" layoutY="400.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Dashboard Vol" />
+                        <Button fx:id="logout_button" layoutX="40.0" layoutY="450.0" maxWidth="180.0" minHeight="36.0" minWidth="119.0" prefHeight="36.0" prefWidth="119.0" text="Déconnexion" />
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane prefHeight="400.0" prefWidth="600.0" >
+            <children>
+                <AnchorPane layoutX="-4.0" prefHeight="505.0" prefWidth="478.0" style="-fx-background-color: #B0E0E6;" />
+                <ImageView fitHeight="525.0" fitWidth="715.0" layoutX="-69.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="rep" layoutX="26.0" layoutY="90.0" prefHeight="45.0" prefWidth="132.0" text="reponse" textFill="#141dc9">
+                    <font>
+                        <Font size="33.0" />
+                    </font></Label>
+                <TextField fx:id="reponse" layoutX="174.0" layoutY="72.0" prefHeight="99.0" prefWidth="269.0" />
+                <Button fx:id="valider" layoutX="332.0" layoutY="225.0" mnemonicParsing="false" onAction="#ref" style="-fx-background-color: #00aef0;" text="Valider">
+                    <font>
+                        <Font size="25.0" />
+                    </font></Button>
+                <Label fx:id="erreur" layoutX="174.0" layoutY="311.0" />
+                <TextField fx:id="id" layoutX="42.0" layoutY="225.0" prefHeight="54.0" prefWidth="213.0" />
+                <AnchorPane layoutX="474.0" prefHeight="505.0" prefWidth="200.0" style="-fx-background-color: #00aef0;" />
+            </children>
+        </AnchorPane>
+
+
+    </center>
+</BorderPane>
+
