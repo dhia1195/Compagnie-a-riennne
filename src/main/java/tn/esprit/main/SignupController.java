@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import tn.esprit.jdbc.services.ServiceRole;
 import tn.esprit.jdbc.services.ServiceUser;
 import tn.esprit.jdbc.entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,64 +65,60 @@ public class SignupController implements Initializable {
         });
         boutton_signup.setOnAction(sigup -> {
             try {
-                boolean v=true;
+                boolean v = true;
                 while (v) {
-
-
-
                     if (su.findByMail(email.getText()).getId() != 0) {
                         v = false;
                         email_existe.setText("email existe deja");
-
-                    }
-                    else if(!Pattern.compile(EMAIL_PATTERN).matcher(email.getText()).matches()){
+                    } else if (!Pattern.compile(EMAIL_PATTERN).matcher(email.getText()).matches()) {
                         v = false;
                         email_existe.setText("email invalide");
-
-                    }
-                    else
+                    } else {
                         email_existe.setText("");
+                    }
 
                     if (!Objects.equals(password.getText(), conf_password.getText())) {
                         v = false;
                         pass_conf.setText("mot de passe n'est pas conforme");
-
+                    } else {
+                        pass_conf.setText("");
                     }
-                    else pass_conf.setText("");
 
                     user.setNom(nom.getText());
                     user.setPrenom(prenom.getText());
                     user.setEmail(email.getText());
-                    user.setPassword(password.getText());
 
+                    // Generate a random salt for the password
+                    String salt = BCrypt.gensalt();
 
+                    // Hash the password with the salt
+                    String hashedPassword = BCrypt.hashpw(password.getText(), salt);
+
+                    user.setPassword(hashedPassword);
                     user.setRole(sr.findByRole("client"));
+
                     if (v) {
                         su.createOne(user);
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("client.fxml"));
-                        Parent root= null;
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
+                        Parent root = null;
                         try {
                             root = loader.load();
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
-                        ClientController cc=loader.getController();
+                        ClientController cc = loader.getController();
                         cc.setClient(user);
                         password.getScene().setRoot(root);
-
                     }
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-
-
             System.out.println(user.toString());
-
-
         });
+
 
     }
 }

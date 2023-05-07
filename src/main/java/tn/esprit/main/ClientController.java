@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.services.ServiceUser;
 import java.io.IOException;
@@ -151,7 +152,11 @@ public class ClientController implements Initializable {
                     user.setNom(nom.getText());
                     user.setPrenom(prenom.getText());
                     user.setEmail(email.getText());
-                    user.setPassword(password.getText());
+                    String salt = BCrypt.gensalt();
+
+                    // Hash the password with the salt
+                    String hashedPassword = BCrypt.hashpw(password.getText(), salt);
+                    user.setPassword(hashedPassword);
                     if (v) {
                         su.updateOne(user, user.getId());
                         FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));

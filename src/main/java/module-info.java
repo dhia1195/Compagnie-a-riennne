@@ -3,9 +3,10 @@ module com.example.pi {
     requires javafx.fxml;
     requires java.sql;
     requires javax.mail.api;
-    requires org.jfree.jfreechart;
     requires itextpdf;
     requires java.desktop;
+    requires org.jfree.jfreechart;
+    requires jbcrypt;
 
 
     opens tn.esprit.main to javafx.fxml;

@@ -1,5 +1,6 @@
 package tn.esprit.jdbc.services;
 
+import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.jdbc.entities.User;
 import tn.esprit.jdbc.utils.MaConnexion;
 
@@ -211,25 +212,33 @@ public class ServiceUser implements IService<User> {
     }
 
     public User authenticate(String mail, String password) throws SQLException {
-        User u =new User();
-        String req = "SELECT * FROM `user` Where `email`=? and `password`=?";
+        User u = null;
+        String req = "SELECT * FROM `user` WHERE `email`=?";
         PreparedStatement st = cnx.prepareStatement(req);
 
         st.setString(1, mail);
-        st.setString(2, password);
         ResultSet rs = st.executeQuery();
-        while(rs.next()) {
-            u.setId(rs.getInt("id_user"));
-            u.setNom(rs.getString("nom"));
-            u.setPrenom(rs.getString("prenom"));
-            u.setEmail(rs.getString("email"));
-            u.setPassword(rs.getString("password"));
-            u.setSexe(rs.getString("sexe"));
-            u.setRole(sr.findById(rs.getInt("user_role")));
+        if (rs.next()) {
+            String hashedPassword = rs.getString("password");
+            if (BCrypt.checkpw(password, hashedPassword)) {
+                u = new User();
+                u.setId(rs.getInt("id_user"));
+                u.setNom(rs.getString("nom"));
+                u.setPrenom(rs.getString("prenom"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(hashedPassword);
+                u.setSexe(rs.getString("sexe"));
+                u.setRole(sr.findById(rs.getInt("user_role")));
+            }
         }
 
         return u;
     }
+
+
+
+
+
 
 
 }

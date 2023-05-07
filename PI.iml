@@ -29,7 +29,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="httpclient-4.5.13-javadoc" level="project" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/jfreechart-1.5.3.jar!/" />
@@ -38,13 +38,37 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Downloads/GestionReclamation/twilio-8.0.0-jar-with-dependencies.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/Compagnie-aeriennne-ReservationTransport/ResevationTransport/itextpdf-5.5.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/jfreechart-1.0.19" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/jfreechart-1.0.19/experimental" />
+          <root url="file://$USER_HOME$/Downloads/jfreechart-1.0.19/source" />
+          <root url="file://$USER_HOME$/Downloads/jfreechart-1.0.19/swt" />
+          <root url="file://$USER_HOME$/Downloads/jfreechart-1.0.19/tests" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/jfreechart-1.0.19" recursive="false" />
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17.0.1" level="project" />
@@ -55,6 +79,9 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jfree:jcommon:1.0.23" level="project" />
+    <orderEntry type="library" name="Maven: org.jfree:jfreechart:1.5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.mindrot:jbcrypt:0.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-api:5.8.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.opentest4j:opentest4j:1.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-commons:1.8.1" level="project" />
@@ -64,14 +91,5 @@
     <orderEntry type="library" name="Maven: javax.mail:javax.mail-api:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/Compagnie-aeriennne-ReservationTransport/ResevationTransport/itextpdf-5.5.9.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

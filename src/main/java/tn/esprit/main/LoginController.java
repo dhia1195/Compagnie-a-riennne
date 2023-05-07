@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import tn.esprit.jdbc.entities.Role;
 import tn.esprit.jdbc.services.ServiceUser;
 import tn.esprit.jdbc.entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -60,71 +61,66 @@ public class LoginController  implements Initializable {
 
             User user = null;
             try {
-                user = sp.authenticate(mail, password);
+                user = sp.authenticate(mail,password);
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            System.out.println(user.toString());
-            if (user.getId() != 0) {
 
-                Role role = user.getRole();
+            if (user != null) {
+                if (BCrypt.checkpw(password, user.getPassword())) {
+                    Role role = user.getRole();
 
-                switch (role.getRole()) {
-                    case "admin":
-                        FXMLLoader loaderadmin=new FXMLLoader(getClass().getResource("admin.fxml"));
-                        Parent admin= null;
-                        try {
-                            admin = loaderadmin.load();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        AdminController ac=loaderadmin.getController();
-                        ac.setAdmin(user);
+                    switch (role.getRole()) {
+                        case "admin":
+                            FXMLLoader loaderadmin = new FXMLLoader(getClass().getResource("admin.fxml"));
+                            Parent admin = null;
+                            try {
+                                admin = loaderadmin.load();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                            AdminController ac = loaderadmin.getController();
+                            ac.setAdmin(user);
 
+                            button_login.getScene().setRoot(admin);
+                            break;
+                        case "client":
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("client.fxml"));
+                            Parent root = null;
+                            try {
+                                root = loader.load();
+                                ClientController cc = loader.getController();
+                                cc.setClient(user);
+                            } catch (IOException | SQLException e) {
+                                throw new RuntimeException(e);
+                            }
 
-                        button_login.getScene().setRoot(admin);
+                            button_login.getScene().setRoot(root);
+                            break;
+                        case "chauffeur":
+                            FXMLLoader loaderch = new FXMLLoader(getClass().getResource("chauffeur.fxml"));
+                            root = null;
+                            try {
+                                root = loaderch.load();
+                                ChauffeurController chc = loaderch.getController();
+                                chc.setChauffeur(user);
+                            } catch (IOException | SQLException e) {
+                                throw new RuntimeException(e);
+                            }
 
-
-                        break;
-                    case "client":
-                        FXMLLoader loader=new FXMLLoader(getClass().getResource("client.fxml"));
-                        Parent root= null;
-                        try {
-                            root = loader.load();
-                            ClientController cc=loader.getController();
-                            cc.setClient(user);
-                        } catch (IOException | SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        button_login.getScene().setRoot(root);
-
-
-
-
-                        break;
-                    case "chauffeur":
-                        FXMLLoader loaderch=new FXMLLoader(getClass().getResource("chauffeur.fxml"));
-                        root= null;
-                        try {
-                            root = loaderch.load();
-                            ChauffeurController chc=loaderch.getController();
-                            chc.setChauffeur(user);
-                        } catch (IOException | SQLException e) {
-                            throw new RuntimeException(e);
-                        }
-
-                        button_login.getScene().setRoot(root);
-                        break;
-
+                            button_login.getScene().setRoot(root);
+                            break;
+                    }
+                } else {
+                    errorMessageLabel.setText("Invalid mail or password");
                 }
             } else {
                 errorMessageLabel.setText("Invalid mail or password");
-
-
-
             }
         });
+
+
+
 
         button_registre.setOnAction(registre ->{
             FXMLLoader loader=new FXMLLoader(getClass().getResource("signup.fxml"));
